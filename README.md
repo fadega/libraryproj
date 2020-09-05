@@ -28,7 +28,7 @@ You may also see **PHP Warning:  Module 'mysqli'...** depending on your system c
 ___
 
 ### <span style="color:#f77f00">Accessing the website(the web application through browser URL)</span>
-1. If you are accessing it from a localhost the url would look like so:
+1. If you are accessing it from a localhost, the url would look like so:
 ````
       localhost/Project/templates/index.php
 ````

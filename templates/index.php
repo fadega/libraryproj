@@ -67,7 +67,7 @@ require '../app/libcommon.php';
                       <th>Category </th>
                       <th>Genre</th>
                       <th>Year</th>
-                      <th>Price</th>
+                      <!-- <th>Price</th> -->
                       <th>Action</th>
                   </tr>
 
@@ -94,12 +94,12 @@ require '../app/libcommon.php';
                       <td><?php echo $row['pname'];?></td>
                       <td><?php echo $row['cname'];?></td>
                       <td><?php echo $row['gname'];?></td>
-                      <td><?php echo $row['year'];?></td>
-                      <td><?php echo $row['price'];?></td>
+                      <!-- <td><?php //echo $row['year'];?></td> -->
+                      <td><?php echo '$'.$row['price'];?></td>
 
                       <td>
-                         <a class="edit" href="../templates/editbook.php?id=<?php echo $row['book_id'];?>">Edit</a>
-                         <a class="delete" href="../template/deletebook.php?id=<?php echo $row['book_id'];?>">Delete</a>
+                         <a class="edit book-edit" href="../templates/editbook.php?id=<?php echo $row['book_id'];?>">Edit</a>
+                         <a class="delete book-delete" href="../templates/deletebook.php?id=<?php echo $row['book_id'];?>">Delete</a>
                       </td>
                     </tr>
 

@@ -66,7 +66,7 @@ body{
   color:red;
   background:#d62828;
   color:white;
-  padding:0.4em 0.8em;
+  padding:0.3em 0.3em;
   border-radius: 3px;
 
 }
@@ -75,11 +75,10 @@ body{
   margin-right:15px;
   background:#3a86ff;
   color:#fff;
-  padding:0.4em 0.8em;
+  padding:0.3em 0.3em;
   border-radius: 3px;
-
-
 }
+
 /******** END TABLE STYLE ****/
 
 /******** START MAIN-LINKS STYLES ****/
