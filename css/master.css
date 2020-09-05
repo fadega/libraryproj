@@ -1,0 +1,292 @@
+*{
+ box-sizing: border-box;
+ padding:0;
+ margin:0;
+}
+
+html{
+    box-sizing: border-box;
+    font-size: 17px;
+    line-height: 1.6;
+    font-family: 'Source Sans Pro', sans-serif, Segoe UI, Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: #878787;
+}
+*, *::before, *:after{
+    box-sizing: inherit;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    margin:0 auto;
+    padding:0;
+    /* font-family: 'Source Sans Pro', sans-serif; */
+    font-size:20px;
+
+
+}
+
+.main-container{
+  /* background-color: red; */
+  margin:0 auto;
+  width:80%;
+  padding:0 0.5rem 2rem 0.5rem;
+
+}
+
+/********  TABLE STYLE ****/
+
+.db-table {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+
+}
+
+.db-table td, .db-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.db-table tr:nth-child(even){background-color: #f2f2f2;}
+
+.db-table tr:hover {background-color: #ddd;}
+
+.db-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  /* background-color: #4CAF50; */
+  background-color:#00509d;
+  color: white;
+  text-align: center;
+}
+.db-table .delete{
+  color:red;
+  background:#d62828;
+  color:white;
+  padding:0.4em 0.8em;
+  border-radius: 3px;
+
+}
+.db-table .edit{
+
+  margin-right:15px;
+  background:#3a86ff;
+  color:#fff;
+  padding:0.4em 0.8em;
+  border-radius: 3px;
+
+
+}
+/******** END TABLE STYLE ****/
+
+/******** START MAIN-LINKS STYLES ****/
+
+#link-wrapper{
+  /* background:#ced4da; */
+  padding:2rem 1rem;
+  width:100%;
+  display:flex;
+  flex-direction: row;
+}
+#link-wrapper a{
+  padding:0.8rem;
+  color:#00509d;
+  flex:1;
+  border:1px solid #00509d;
+  margin:0.5%;
+  font-size:1.6rem;
+  text-align: center;
+  border-radius: 4px;
+}
+#link-wrapper a:hover{
+  padding:0.8rem;
+  color:var(--greenaple);
+  background:#00509d;
+
+}
+
+/******** END MAIN-LINKS STYLES ****/
+
+
+
+
+main{
+    margin: 1rem auto;
+    width: 80%;
+    max-width: 1000px;
+    /* background: red; */
+}
+
+
+/*********************
+        Form
+*********************/
+input, label, button{
+    padding: 0.2rem 1rem;
+    font-size: 1.2rem;
+    color: inherit;
+}
+.form-box{
+    padding: 0.5rem 0;
+    display: flex;
+    flex-direction: column;
+}
+.form-box label{
+    display: none;
+}
+.form-box input,
+.form-box select,
+.form-box textarea{
+    flex-basis: 100%;
+}
+.form-box button{
+
+}
+.form-box select option{
+  font-size: 1.2rem;
+  color: inherit;
+  color: #878787;
+}
+
+#condition, #category_id, #author_id, #publishers_id, #genre_id,#comment,#book_id{
+  font-size: 1.2rem;
+  color: inherit;
+  color: #878787;
+  padding: 0.3em 0.6em;
+}
+
+
+#btnSend{
+    margin-right: 5px;
+}
+
+
+/*** START SIGNIN MODAL FORM STYLES **/
+#bg-modal{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  /* opacity: 0.7; */
+  position: absolute;
+  top:0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+ }
+ #modal-content{
+   width:600px;
+   height: 400px;
+   background-color: #fff;
+   border-radius: 0.2em;
+   position: absolute;
+   transform: translate(50%;50%);
+   padding: 20px;
+   text-align: center;
+   position: relative;
+   /* background-color: red; */
+   opacity: 1;
+
+ }
+ #modal-content{
+   margin: 0px auto;
+ }
+ #modal-content input{
+   width:80%;
+   display: block;
+   margin: 15px auto;
+   padding:0.4em;
+
+ }
+
+ #modal-content .btn-login{
+   border-radius:4rem;
+   cursor: pointer;
+   margin-left: 1.8em;
+   background-color:#adb5bd;
+   color:#0081a7;
+
+ }
+ #modal-content .btn-login:hover{
+   border-radius:4rem;
+   cursor: pointer;
+   margin-left: 1.8em;
+   background-color:#0081a7;
+   color:#fff;
+
+ }
+
+#modal-content .close{
+  position: absolute;
+  top: 0;
+  font-size: 40px;
+  right: 15px;
+  transform: rotate(45deg);
+  cursor: pointer;
+}
+
+/**FOOTER STYLES***/
+#footer{
+    width:100%;
+    height:150px;
+    /* position: absolute; */
+    bottom: calc(100vh - 10px);
+    /* bottom: 0; */
+    background:#222;
+    color:#fff;
+    text-align:left;
+    padding: 50px 50px 50px 100px;
+
+}
+
+/*******************************
+        Media Queries
+*******************************/
+@media all and (min-width: 500px){
+    .form-box{
+
+    }
+    .form-box label{
+        display: block;
+    }
+    .form-box input,
+    .form-box select,
+    .form-box textarea{
+
+    }
+    .form-box button{
+
+    }
+
+}
+
+@media all and (min-width: 600px){
+    .form-box{
+        flex-direction: row;
+    }
+    .form-box label{
+        flex-basis: 9rem;
+        flex-grow: 0;
+        flex-shrink: 0;
+    }
+    .form-box input,
+    .form-box select,
+    .form-box textarea{
+        flex-basis: 0;
+        flex-grow: 1;
+        flex-shrink: 1;
+    }
+    .form-box button{
+        margin-left: 9rem;
+    }
+
+}
+/**** ----- LOWER BUTTON STYLES ------***/
+
+@media only screen and (max-width:768px){
+    #link-wrapper{display: flex;flex-direction: column;}
+
+}

@@ -1,0 +1,206 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+html{
+    box-sizing: border-box;
+    font-size: 16px;
+    line-height: 1.5;
+    /* font-family: 'Source Sans Pro', sans-serif, Segoe UI, Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; */
+    /* color: #878787; */
+
+
+}
+:root{
+  --greyapple:#ecf0f1;
+  --brightorange:#ff9f1c;
+  --lightgrey:#D3D3D3;
+  --greenaple:#2ecc71;
+  --drakmatter:#34495e;
+  --darkermatter:#2c3e50;
+}
+body{
+  background-color: var(--greyapple);
+  font-family: "IBM Plex Sans", Verdana, Tahoma, sans-serif;
+}
+*, *::before, *:after{
+    box-sizing: inherit;
+    padding: 0;
+    margin: 0;
+}
+a{
+  text-decoration: none;
+  color:var(--darkermatter);
+}
+a:active{
+  background:var(--greyapple);
+}
+a:hover{
+  color:var(--greenaple);
+}
+
+#dashboard{
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+}
+  #dashside-left{
+    display: grid;
+    background-color:var(--darkermatter);
+    font-size:1.2em;
+    font-weight: bold;
+    padding:2rem 0;
+    max-height: 100vh;
+   }
+      #dashside-left h2{
+        margin-left:-20px;
+      }
+      #dashside-left a,   #dashside-left h2{
+        padding:10px 0 5px 40px;
+        color:#e9ecef;
+      }
+
+      #dashside-left a:hover{
+        background-color:var(--greyapple);
+        color:var(--greenaple);
+      }
+
+  #dashside-right{
+    display: flex;
+    flex-direction: column;
+    padding:1rem;
+    font-size:1.2em;
+
+    }
+      #dashside-right .right-top{
+        display:inline-block;
+        padding:2rem 0 1rem 0;
+        text-align: right;
+        margin-bottom: 0;
+        font-size:1.3rem;
+        font-weight: bold;
+
+      }
+      #dashside-right .right-top *{
+        margin-left:20px;
+
+      }
+
+        #dashside-right .right-top .searchBox{
+          width:30%;
+          padding:0.5rem;
+          font-size:1.3rem;
+          border:none;
+          background-color:var(--greyapple);
+          border-bottom:1px solid #ced4da;
+          outline: none;
+        }
+        #dashside-right .right-middle{
+          background:#eee;
+          padding:2rem;
+          border:1px solid #e5e5e5;
+        }
+
+      #dashside-right .right-bottom{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap:0.5rem;
+        padding:1rem 0.5rem;
+      }
+
+      #dashside-right .right-bottom div{
+        background-color:var(--lightgrey);
+        padding:2rem;
+        text-align:center;
+        border-radius: 3px;
+        color:var(--darkermatter);
+        display:grid;
+        align-content:center;
+        align-items: center;
+        min-height: 250px;
+      }
+      #dashside-right .right-bottom div:nth-child(even){
+        background-color:var(--darkermatter);
+        color:var( --lightgrey);
+
+      }
+      #dashside-right .right-bottom .rt-special{
+        grid-column-start: 1;
+        grid-column-end: 4;
+
+      }
+        #dashside-right .right-bottom .rt-books h2{
+          margin-top:-5px;
+          color:red;
+        }
+
+
+/**** This code is for  side bar left and display right test***/
+
+/* .nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:300px;
+    width:100px;
+    float:left;
+    padding:5px;
+}
+.active {
+    font-weight:bold;
+}
+.section {
+    width:350px;
+    float:left;
+    padding:10px;
+}
+.footer {
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px;
+} */
+
+
+/* *******MEDIA QUERIES */
+
+
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (max-width: 992px) {
+  #dashside-right{
+    padding:0.2rem;
+  }
+  #dashside-right .right-bottom{
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    grid-gap:0.2rem;
+    padding:0.5rem 0.5rem;
+    }
+
+    #dashside-right .right-bottom .rt-special{
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
+  #dashside-right{
+    padding:0.2rem;
+  }
+  #dashside-right .right-bottom{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap:0.2rem;
+    padding:0.3rem 0.3rem;
+    }
+
+    #dashside-right .right-bottom .rt-special{
+      grid-column-start: 1;
+      grid-column-end: 2;
+
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 600px) {
+
+}
