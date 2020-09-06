@@ -98,19 +98,13 @@ require '../app/libcommon.php';
                       <td><?php echo '$'.$row['price'];?></td>
 
                       <td>
-                         <a class="edit book-edit" href="../templates/editbook.php?id=<?php echo $row['book_id'];?>">Edit</a>
-                         <a class="delete book-delete" href="../templates/deletebook.php?id=<?php echo $row['book_id'];?>">Delete</a>
+                         <a class="edit" href="../templates/editbook.php?id=<?php echo $row['book_id'];?>">Edit</a>
+                         <a class="delete" href="../templates/deletebook.php?id=<?php echo $row['book_id'];?>">Delete</a>
                       </td>
                     </tr>
 
                   <?php endforeach; ?>
                 </table>
-
-
-
-
-
-
 
 
             <?php

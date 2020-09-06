@@ -16,7 +16,7 @@
         <h1>Update details</h1>
 
         <!-- <form name="my-form" action="../templates/editUser.inc.php" method="post"> -->
-        <form name="my-form" action ="../templates/editUser.inc.php" method="post">
+        <form name="my-form" action ="../app/editUser.inc.php" method="post">
             <div class="form-box">
                 <label for="fname">First name</label>
                 <input type="text" id="firstname" name="firstname" value="<?php echo $result['firstname'] ;?>" >

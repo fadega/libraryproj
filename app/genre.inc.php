@@ -20,7 +20,7 @@
 			 exit();
 	  }else {
   			//call a function that checks if the user already exists
-				$query = "SELECT  *FROM `genre` WHERE cname = :unique";
+				$query = "SELECT  *FROM `genre` WHERE gname = :unique";
 				$exist = checkRecord($query, $genre);
 
 			if($exist){
@@ -30,7 +30,7 @@
         }else{
              try{
 							 //call function to insert data
-								insertData("INSERT INTO `genre` (cname, category_id) VALUES(:name, :category_id)", array(
+								insertData("INSERT INTO `genre` (gname, category_id) VALUES(:name, :category_id)", array(
 									':name'=>$genre,':category_id'=>$category));
 
 

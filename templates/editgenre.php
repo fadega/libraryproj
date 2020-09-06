@@ -2,11 +2,21 @@
 <?php  require '../app/header.php';
        require '../app/dbh.php';
 
+       //to bind category field for genre
        $stmt = $conn->prepare('SELECT *FROM category');
        $stmt->execute();
-       // $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
-       // echo '<pre>';
-       // print_r($res);
+
+
+
+       $id= $_GET['id'];
+
+       //To push data to the textfields from
+       // $sql = 'SELECT *FROM genre WHERE genre_id=:id';
+       $sql = $conn->prepare('SELECT *FROM genre WHERE genre_id=:id');
+       $sql->execute([':id'=>$id]);
+       $result = $sql->fetch(PDO::FETCH_ASSOC);
+
+
 ?>
 
 
@@ -35,18 +45,30 @@
      ?>
 
 
-        <form name="my-form" action="../app/genre.inc.php" method="post">
-          <h1>Add Genre</h1>
+        <form name="my-form" action="../app/editgenre.inc.php" method="post">
+          <h1>Edit Genre</h1>
             <div class="form-box">
                 <label for="genre">Genre</label>
-                <input type="text" id="genre" name="genre" placeholder="Enter genre name..." >
+                <input type="text" id="genre" name="genre" value="<?php echo $result['gname'] ;?>" >
             </div>
+
+            <?php
+              $sql = 'SELECT g.gname, g.category_id, c.cname
+                          FROM genre g, category c
+                              WHERE g.category_id = c.category_id';
+
+              $query = $conn->prepare($sql);
+              $query->execute();
+              $myResult = $query->fetch(PDO::FETCH_ASSOC);
+              // print_r($myResult);
+             ?>
 
             <div class="form-box">
               <label for="genre">Category</label>
                   <select name="category" id="category_id">
-                    <option>Select category..</option>
-                        <?php
+                    <option value="<?php echo $myResult['category_id'] ;?>"><?php echo $myResult['cname'] ;?></option>
+                    <!-- <option >Select a category for update</option> -->
+                         <?php
                            while($res = $stmt->fetch(PDO::FETCH_ASSOC)){?>
                               <option value="<?php echo $res['category_id'] ;?>"><?php echo $res['cname'] ;?></option>
                         <?php } ?>
@@ -54,7 +76,8 @@
                     </select>
             </div>
             <div class="form-box">
-                <button type="submit" id="btnSend" name="submit-genre">Add Genre</button>
+                <button type="submit" id="btnSend" name="updategenre" value="<?php echo $id ;?>">Update Genre</button>
+                <!-- <button type="submit" id="btnSend" name="updategenre" value="<?php //echo $id ;?>">Update Genre</button> -->
            </div>
         </form>
 
@@ -83,14 +106,14 @@
         // echo '<pre>';
         // print_r($data);
         foreach($data as $row):?>
-          <tr> 
+          <tr>
 
             <td><?php echo $row['genre_id'];?></td>
-            <td><?php echo  ucfirst($row['gname']);?></td>
-            <td><?php echo  ucfirst($row['cname']);?></td>
+            <td><?php echo $row['gname'];?></td>
+            <td><?php echo $row['cname'];?></td>
             <td>
                <a class="edit" href="../templates/editgenre.php?id=<?php echo $row['genre_id'];?>">Edit</a>
-               <a class="delete" href="../app/deletegenre.php?id=<?php echo $row['genre_id'];?>">Delete</a>
+               <a class="delete" href="../templates/genre.php?id=<?php echo $row['genre_id'];?>">Delete</a>
             </td>
           </tr>
 

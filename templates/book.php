@@ -25,7 +25,7 @@ $genStmt->execute();
   <?php
     //Check if user is authorized to access the page
     if(isset($_SESSION['useremail'])||isset($_SESSION['emailId'])){?>
-        <h1>Add a book </h1>
+
           <?php
         //  check for error messages
           if(isset($_GET['error'])){
@@ -49,6 +49,7 @@ $genStmt->execute();
          ?>
 
         <form name="my-form" action="../app/book.inc.php" method="post">
+          <h1>Add a book </h1>
             <div class="form-box">
                 <label for="title">Title</label>
                 <input type="text" id="title" name="title" placeholder="Book Title" required >
@@ -139,8 +140,63 @@ $genStmt->execute();
                 <span class="span"> You want to add an author? <a href="../templates/author.php">Add author</a> </span>
             </div>
 
-
         </form>
+
+
+        <br><hr>
+
+      <h3>Books-Table</h3>
+      <table class="db-table">
+        <tr>
+
+            <th>Title </th>
+            <th>Author </th>
+            <th>Publisher </th>
+            <th>Category </th>
+            <th>Genre</th>
+            <th>Year</th>
+            <!-- <th>Price</th> -->
+            <th>Action</th>
+        </tr>
+
+      <?php
+
+      $sql ='SELECT book_id,title ,year, price, firstname, pname, cname, gname
+                      FROM book b, author a, publisher p, category c, genre g
+                      WHERE b.author_id = a.author_id OR
+                            b.publisher_id = p.publisher_id OR
+                            b.category_id = c.category_id OR
+                            b.genre_id =g.genre_id';
+
+      $res = $conn->prepare($sql);
+      // $res = $conn->prepare('SELECT * FROM book');
+      $res->execute();
+      $data = $res->fetchAll(PDO::FETCH_ASSOC);
+      // echo '<pre>';
+      // print_r($data);
+     foreach($data as $row):?>
+          <tr>
+
+            <td><?php echo $row['title'];?></td>
+            <td><?php echo $row['firstname'];?></td>
+            <td><?php echo $row['pname'];?></td>
+            <td><?php echo $row['cname'];?></td>
+            <td><?php echo $row['gname'];?></td>
+            <!-- <td><?php //echo $row['year'];?></td> -->
+            <td><?php echo '$'.$row['price'];?></td>
+
+            <td>
+               <a class="edit" href="../templates/editbook.php?id=<?php echo $row['book_id'];?>">Edit</a>
+               <a class="delete" href="../app/deletebook.php?id=<?php echo $row['book_id'];?>">Delete</a>
+            </td>
+          </tr>
+
+        <?php endforeach; ?>
+      </table>
+
+
+
+
       <?php }else{
         //if a user isn't signedin, s/he will see this
 

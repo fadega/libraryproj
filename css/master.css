@@ -99,6 +99,7 @@ body{
   font-size:1.6rem;
   text-align: center;
   border-radius: 4px;
+
 }
 #link-wrapper a:hover{
   padding:0.8rem;
@@ -114,9 +115,15 @@ body{
 
 main{
     margin: 1rem auto;
-    width: 80%;
-    max-width: 1000px;
-    /* background: red; */
+    width:90%;
+    max-width: 1200px;
+
+}
+
+main form{
+  width:70%;
+  margin:0 auto;
+
 }
 
 

@@ -1,6 +1,6 @@
 <?php
 
-	if(ISSET($_POST['add-author'])){
+	if(isset($_POST['add-author'])){
     require_once 'dbh.php';
 		require_once '../app/libcommon.php';
 

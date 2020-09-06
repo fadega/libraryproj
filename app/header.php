@@ -29,7 +29,7 @@
           <?php
             if(isset($_SESSION['useremail'])||isset($_SESSION['firstname'])){
               echo ' <a href="../app/signout.inc.php">Signout</a>';
-              echo ' <a href="../app/profile.php"><span> <img src="" alt=""></span>'.$_SESSION['firstname'].'</a>';
+              echo ' <a href="../templates/profile.php"><span> <img src="" alt=""></span>'.$_SESSION['firstname'].'</a>';
             }else{
               // echo '<a href="#" id="showmodal" name="button">Modal </a>';
               echo '<a name="signin-submit" href="../templates/signin.php">Signin</a>';
@@ -47,7 +47,7 @@
         <?php
           if(isset($_SESSION['useremail'])||isset($_SESSION['firstname'])){
             echo ' <a href="../app/signout.inc.php">Signout</a>';
-            echo ' <a href="../app/profile.php"><span> <img src="" alt=""></span>'.$_SESSION['firstname'].'</a>';
+            echo ' <a href="../templates/profile.php"><span> <img src="" alt=""></span>'.$_SESSION['firstname'].'</a>';
           }else{
             echo '<a name="signin-submit" href="../templates/signin.php">Signin</a>';
             echo '<a name="log-submit" href="../templates/signup.php">Singup</a>';

@@ -4,7 +4,7 @@ require '../app/dbh.php';
 if(isset($_GET['id'])){
   $id = $_GET['id'];
 
-      $sql = 'DELETE FROM book WHERE book_id = :id';
+      $sql = 'DELETE FROM author WHERE author_id = :id';
 
        $stmt = $conn->prepare($sql);
        $stmt->bindValue(':id', $id);
@@ -13,11 +13,11 @@ if(isset($_GET['id'])){
 
        // return $stmt->rowCount();
        $count = $stmt->rowCount();
-       header('Location:../templates/index.php?delete=success&deletedid='.$id);
+       header('Location:../templates/author.php?delete=success&deletedid='.$id);
        exit();
 
 }else{
-  header("Location:../templates/index.php?error=illegal-delete-request");
+  header("Location:../templates/author.php?error=illegal-delete-request");
   exit();
 }
  ?>

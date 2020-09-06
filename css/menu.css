@@ -24,8 +24,11 @@ body{
 /************* RESPONSIVE MENU STYLES - BEGIN *****/
     a {
       text-decoration: none;
-        color:#3a86ff;
+        /* color:#3a86ff; */
         color:#00509d;
+        color: #023047;
+        color: #073b4c;
+        color:red;
 
     }
           a:hover{

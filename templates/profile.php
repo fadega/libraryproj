@@ -1,7 +1,7 @@
 
 <?php
-require 'header.php';
-require 'dbh.php';
+require '../app/header.php';
+require '../app/dbh.php';
 
 ?>
 <?php
@@ -10,10 +10,10 @@ require 'dbh.php';
         <div class="main-container">
           <h2><br>This is profile page!</h2><br>
           <?php echo 'User:'.$_SESSION['firstname'].'<br>';
-                echo 'Email:'.$_SESSION['firstname'].'<br>';
+                echo 'Email:'.$_SESSION['useremail'].'<br>';
                 echo 'Status:Loggedin <br>';
                 ?>
-                <a href="../templates/signout.inc.php">Signout from here?</a>
+                <a href="../templates/signout.inc.php">Signout</a>
 
         </div>
       <?php }else{
@@ -31,4 +31,4 @@ require 'dbh.php';
 
 
 
-<?php require 'footer.php'; ?>
+<?php require '../app/footer.php'; ?>

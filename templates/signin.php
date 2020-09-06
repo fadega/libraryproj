@@ -4,7 +4,7 @@
 
 
 <main>
-      <h1>Sign in</h1>
+
 
       <?php
         //check for error messages
@@ -26,6 +26,7 @@
            ?>
 
        <form name="my-form" action="../app/signin.inc.php" method="post">
+         <h1>Sign in</h1>
            <div class="form-box">
                <label for="email">Email</label>
                <input type="email" id="email" name="emailId" placeholder="Email" required>

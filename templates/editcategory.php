@@ -2,6 +2,16 @@
 <?php
  require '../app/header.php';
  require '../app/dbh.php';
+
+ $id= $_GET['id'];
+
+ //To push data to the textfields from
+ $sql = 'SELECT *FROM category WHERE category_id=:id';
+ $stmt = $conn->prepare($sql);
+ $stmt->execute([':id'=>$id]);
+ $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
 ?>
 
 <main>
@@ -25,16 +35,16 @@
 
      ?>
 
-        <form name="my-form" action="../app/category.inc.php" method="post">
-          <h1>Add Category</h1>
+        <form name="my-form" action="../app/editcategory.inc.php" method="post">
+          <h1>Edit Category</h1>
 
             <div class="form-box">
                 <label for="category">Category</label>
-                <input type="text" id="category" name="category" placeholder="Category Name" >
+                <input type="text" id="category" name="category" value="<?php echo $result['cname'] ;?>" >
             </div>
 
             <div class="form-box">
-                <button type="submit" id="btnSend" name="submit">Add Category</button>
+                <button type="submit" id="btnSend" name="updatecategory" value="<?php echo $id ;?>">Update Category</button>
                 <!-- <span class="span"> Already have an account? <a href="signin.php">Singin here</a> </span> -->
             </div>
 
@@ -70,7 +80,7 @@
 
             <td>
                <a class="edit" href="../templates/editcategory.php?id=<?php echo $row['category_id'];?>">Edit</a>
-               <a class="delete" href="../app/deletecategory.php?id=<?php echo $row['category_id'];?>">Delete</a>
+               <a class="delete" href="../templates/deletecategory.php?id=<?php echo $row['category_id'];?>">Delete</a>
             </td>
           </tr>
 

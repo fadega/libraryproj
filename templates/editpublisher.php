@@ -2,6 +2,16 @@
 <?php  require '../app/header.php';
     require '../app/dbh.php';
 
+    $id= $_GET['id'];
+
+    //To push data to the textfields from
+    $sql = 'SELECT *FROM publisher WHERE publisher_id=:id';
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([':id'=>$id]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+
 ?>
 
 <main>
@@ -27,25 +37,25 @@
 
      ?>
 
-        <form name="my-form" action="../app/publisher.inc.php" method="post">
+        <form name="my-form" action="../app/editpublisher.inc.php" method="post">
             <h1>Add Publisher</h1>
             <div class="form-box">
                 <label for="publisher">Publisher</label>
-                <input type="text" id="publisher" name="publisher" placeholder="Publisher Name" >
+                <input type="text" id="publisher" name="publisher" value="<?php echo $result['pname'] ;?>" required>
             </div>
 
             <div class="form-box">
                 <label for="city">City</label>
-                <input type="text" id="city" name="city" placeholder="City /Town" >
+                <input type="text" id="city" name="city" value="<?php echo $result['city'] ;?>" required >
             </div>
 
             <div class="form-box">
                 <label for="country">Country</label>
-                <input type="text" id="country" name="country" placeholder="Country" >
+                <input type="text" id="country" name="country" value="<?php echo $result['country'] ;?>" required >
             </div>
 
             <div class="form-box">
-                <button type="submit" id="btnSend" name="submit">Add Publisher</button>
+                <button type="submit" id="btnSend" name="updatepublisher" value="<?php echo$id;?>">Update Publisher</button>
                 <!-- <span class="span"> Already have an account? <a href="signin.php">Singin here</a> </span> -->
             </div>
 
@@ -79,12 +89,12 @@
           <tr>
 
             <td><?php echo $row['publisher_id'];?></td>
-            <td><?php echo ucwords($row['pname']);?></td>
-            <td><?php echo ucwords($row['city']);?></td>
-            <td><?php echo ucwords($row['country']);?></td>
+            <td><?php echo $row['pname'];?></td>
+            <td><?php echo $row['city'];?></td>
+            <td><?php echo $row['country'];?></td>
             <td>
                <a class="edit" href="../templates/editpublisher.php?id=<?php echo $row['publisher_id'];?>">Edit</a>
-               <a class="delete" href="../app/deletepublisher.php?id=<?php echo $row['publisher_id'];?>">Delete</a>
+               <a class="delete" href="../templates/deletepublisher.php?id=<?php echo $row['publisher_id'];?>">Delete</a>
             </td>
           </tr>
 
