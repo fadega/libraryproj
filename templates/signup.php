@@ -64,6 +64,8 @@
 
 
         </form>
+
+        <?php include '../templates/placeholder.html'; ?>
     </main>>
 
 

@@ -1,24 +1,25 @@
 <?php
 
 	if(isset($_POST['add-author'])){
-    require_once 'dbh.php';
+    require_once '../app/dbh.php';
 		require_once '../app/libcommon.php';
 
-    //get user input
+    //Accepting user input from the form
 		$firstname  =  $_POST['firstname'];
 		$lastname   =  $_POST['lastname'];
 		$email      =  $_POST['email'];
 
 
-    //1. Basic validation Rules
+    //1. Basic validation Rules- calling a function from the libcommon.php script
 		$error = validateAuthor($firstname, $lastname, $email);
 	  if ($error !== ""){
+			//if the there is  error during the validation - redirect and tell the error
 			header("Location:../templates/author.php?error=".$error);
 			exit();
 
 		}
 		else {
-	      //create a 	query and call a function to check if record already exists
+	      //if no error during input validate - create a 	query and call checkRecord function from libcommon.php to check if record already exists
 				$query = "SELECT  *FROM `author` WHERE email = :unique";
 				$exist = checkRecord($query, $email);
 
@@ -28,7 +29,7 @@
 				}else{
 
           try{
-						//call function to insert data to author table
+						//call function to insert data to author table - this function is is in libcommon.php
 						insertData("INSERT INTO `author` (firstname, lastname, email) VALUES(:firstname, :lastname, :email)", array(
 							':firstname'=>$firstname,':lastname'=>$lastname,':email'=>$email));
 

@@ -5,7 +5,7 @@
     require_once 'dbh.php';
 		require_once '../app/libcommon.php';
 
-    //get user input
+  //Accepting user input from the form
 		$bookTitle        =  $_POST['title'];
 		$bookAuthor       =  $_POST['author'];
 		$bookISBN         =  $_POST['isbn'];
@@ -17,7 +17,7 @@
     $bookPrice        =  $_POST['price'];
     $bookCondition    =  $_POST['condition'];
 
-    //call a function to validate input
+    //call a function to validate input- function in libcommon.php script
 		$error = validateBook($bookTitle,$bookISBN,$bookYear,$bookPrice);
 
 		if($error !==""){
@@ -32,7 +32,7 @@
 				header("Location:../templates/book.php?error=bookalreadyexists");
 				exit();
 			}else{
-				//call a function to isert data
+				//call a function to isert data - inserData is a function in libcommon.php script
 				try{
 					insertData("INSERT INTO `book` (title, author_id, ISBN, publisher_id,category_id,genre_id,year,cover,price,condition)
 					    VALUES(:tit, :auth, :isb, :pub,:cat,:gen, :yr,:covphoto,:prc,:cond)", array(

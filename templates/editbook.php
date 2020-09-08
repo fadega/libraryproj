@@ -40,6 +40,7 @@ $bid = $_GET['id'];
 ?>
 
 <main>
+<?php if(isset($_SESSION['useremail'])||isset($_SESSION['emailId'])){?>
         <h1>Update book </h1>
           <?php
         //  check for error messages
@@ -155,6 +156,12 @@ $bid = $_GET['id'];
 
 
         </form>
+    <?php  } else{ //End for checking user is signed in
+      echo "<script>alert('Not authorized to peroform this action - sign in please!');
+                document.location='../templates/index.php'</script>";
+    }
+   include '../templates/placeholder.html';
+    ?>
     </main>
 
 

@@ -113,6 +113,7 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
            }//END of SESSION CHECK
+           include '../templates/placeholder.html';
           ?>
     </main>>
 

@@ -142,9 +142,7 @@ $genStmt->execute();
 
         </form>
 
-
-        <br><hr>
-
+        <br>
       <h3>Books-Table</h3>
       <table class="db-table">
         <tr>
@@ -160,39 +158,34 @@ $genStmt->execute();
         </tr>
 
       <?php
-
+      // This query will display books, their publishers, categories, genre and price from different tables
       $sql ='SELECT book_id,title ,year, price, firstname, pname, cname, gname
                       FROM book b, author a, publisher p, category c, genre g
-                      WHERE b.author_id = a.author_id OR
-                            b.publisher_id = p.publisher_id OR
-                            b.category_id = c.category_id OR
-                            b.genre_id =g.genre_id';
+                      WHERE b.author_id = a.author_id AND
+                            b.publisher_id = p.publisher_id AND
+                            b.category_id = c.category_id AND
+                            b.genre_id = g.genre_id';
 
       $res = $conn->prepare($sql);
       // $res = $conn->prepare('SELECT * FROM book');
       $res->execute();
-      $data = $res->fetchAll(PDO::FETCH_ASSOC);
-      // echo '<pre>';
-      // print_r($data);
-     foreach($data as $row):?>
-          <tr>
+      while($row = $res->fetch(PDO::FETCH_ASSOC)){?>
+          <td><?= $row['title'];?></td>
+          <td><?=  $row['firstname'];?></td>
+          <td><?=  $row['pname'];?></td>
+          <td><?=  $row['cname'];?></td>
+          <td><?=  $row['gname'];?></td>
+          <td><?= '$'.$row['price'];?></td>
 
-            <td><?php echo $row['title'];?></td>
-            <td><?php echo $row['firstname'];?></td>
-            <td><?php echo $row['pname'];?></td>
-            <td><?php echo $row['cname'];?></td>
-            <td><?php echo $row['gname'];?></td>
-            <!-- <td><?php //echo $row['year'];?></td> -->
-            <td><?php echo '$'.$row['price'];?></td>
+          <td>
+             <a class="edit" href="../templates/editbook.php?id=<?php echo $row['book_id'];?>">Edit</a>
+             <a class="delete" href="../app/deletebook.php?id=<?php echo $row['book_id'];?>">Delete</a>
+          </td>
+        </tr>
+      <?php  }?>
 
-            <td>
-               <a class="edit" href="../templates/editbook.php?id=<?php echo $row['book_id'];?>">Edit</a>
-               <a class="delete" href="../app/deletebook.php?id=<?php echo $row['book_id'];?>">Delete</a>
-            </td>
-          </tr>
-
-        <?php endforeach; ?>
       </table>
+
 
 
 
@@ -201,14 +194,67 @@ $genStmt->execute();
         //if a user isn't signedin, s/he will see this
 
            echo
-              '  <h2><br>Access denied ..</h2>
-                 <p><br>Oops! You are not authorized. Please signin
+              '
+                 <p><br> You are not signed in,but you can still see books. Please signin
                  <a href="../templates/signin.php">here</a>
                  <span> Or singup <a href="../templates/signup.php">here</a> </span></p>';
 
 
-           }//END of SESSION CHECK
-          ?>
+
+              ?>
+
+        <br>
+      <h3>Books-Table</h3>
+      <table class="db-table">
+        <tr>
+
+            <th>Title </th>
+            <th>Author </th>
+            <th>Publisher </th>
+            <th>Category </th>
+            <th>Genre</th>
+            <th>Year</th>
+            <!-- <th>Price</th> -->
+            <th>Action</th>
+        </tr>
+
+      <?php
+      // This query will display books, their publishers, categories, genre and price from different tables
+      $sql ='SELECT book_id,title ,year, price, firstname, pname, cname, gname
+                      FROM book b, author a, publisher p, category c, genre g
+                      WHERE b.author_id = a.author_id AND
+                            b.publisher_id = p.publisher_id AND
+                            b.category_id = c.category_id AND
+                            b.genre_id = g.genre_id';
+
+      $res = $conn->prepare($sql);
+      // $res = $conn->prepare('SELECT * FROM book');
+      $res->execute();
+      while($row = $res->fetch(PDO::FETCH_ASSOC)){?>
+          <td><?= $row['title'];?></td>
+          <td><?=  $row['firstname'];?></td>
+          <td><?=  $row['pname'];?></td>
+          <td><?=  $row['cname'];?></td>
+          <td><?=  $row['gname'];?></td>
+          <td><?= '$'.$row['price'];?></td>
+
+          <td>
+             <a class="edit" href="../templates/editbook.php?id=<?php echo $row['book_id'];?>">Edit</a>
+             <a class="delete" href="../app/deletebook.php?id=<?php echo $row['book_id'];?>">Delete</a>
+          </td>
+        </tr>
+      <?php  }?>
+
+      </table>
+
+
+    <?php } // END of else-check  for the SESSION
+
+    include '../templates/placeholder.html';
+    ?>
+
+
+
     </main>
 
 

@@ -88,6 +88,7 @@
               </div>
             </div> <!--END bottom-right-->
         </div><!--END dashside-right-->
+        <?php include '../templates/placeholder.html';?>
     </div><!--END dashboard-->
 
 

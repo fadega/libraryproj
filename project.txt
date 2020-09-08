@@ -1,0 +1,79 @@
+Student name: Fadega Afa
+Student ID: u1114252
+
+Project: Book Store
+Relevant info(data): books, authors, genres,  comments, shopping cart
+Book Details: ISBN, Author, Publisher, Date Published, Genre, Price, Edition, Comments, Number available
+Author Details: Author ID, Title, First name, Last name
+
+1. FUNCTIONALITIES/FEATURES
+  a. Admin:
+        - can add, update, and delete from all tables.
+        - search for a book ...
+  b. unregistered user
+        - for now they can only search for books
+
+1.	Public(user) - can search for a book, and register to become a  registered user
+2.	Registered user – can search for a book, buy, comment on a book
+3.	Simple search: searching a book by title
+4.	Advanced Search: Searching a book, its author, publisher, and category. This search pulls data from multiple tables
+(search feature comes with autocomplete feature where suggestions are feed when a matching pattern is typed)
+
+1.DATABASE AND TABLES
+The bookstore application database has 8 tables up until now. The tables are
+author, publisher, user, book, category, genre, comment, and cart. Note that the table names are singular.
+
+a. Strong entities(tables)
+    - The author, user, publisher, and category tables are strong entities and they don't depend on other tables.
+    - Therefore, they don't have foreign keys as their column names
+b. Weak entities (tables)
+    - The book, genre, comment, and cart tables depend on the strong entities to exist. Thus they have columns from the
+    the strong entities as their foreign keys.
+
+2. DIRECTORY STRUCTURE AND FILE ORGANIZATION
+The bookstore application is under the folder name 'Project'. Under this directory(Project), there are 4 sub-directories and 2 files.
+The sub-directories are app, css, js and templates and the files are README.md and the project.txt(this file itself).
+
+    - Almost all pure script (php) files, a sql file, and database are located inside the app directory. You can delete the bookstore.sqlite3
+    database and run install.php to create all the tables insert the sample data. Note that install.php should be executed first before any
+    other operation.
+
+**Once you run 'php install.php', database and tables are created and the tables are populated with a sample data. However, you CAN NOT signin
+with sample username and password. You have to signup and create your own email and password.
+
+***For now links to all features are publicly available, but later, links to some features won't show up for unregistered users or non admins.
+
+ 2.1. The 'app' directory
+   - This directory resides inside the home directory(Project). It contains all the pure php scripts with no html code.
+   - libcommon.php and install.php are in this folder.
+   - Almost all scripts are named in similar manner with an extension of .inc.php. '.inc' is just used for indication purpose - that this file
+   is 'included' or required somewhere. All script files, with the exception of the 'delete' type script, have a corresponding template file with
+   the same name but without the '.inc' extension.
+ 2.2 The 'templates' directory
+   - This directory, like the 'app' directory, resides inside the 'project' directory. It contains all the template files for the corresponding
+   pure scripts in the 'app' directory.
+
+   *Example*
+   - The file signin.php template in the 'templates' directory has a corresponding script in 'app' directory named 'signin.inc.php'.
+
+  3. FEATURES IMPLEMENTED SO FAR
+   - An authenticated user can insert, update, and delete records from all tables except the comments and carts table(yet to be built). Not all
+   registered will be able to do so at later stage. Only admins will be able to do so.
+   - Search is implemented and data is pulled from multiple tables.
+   - Autocomplete feature on the search field is implemented.
+   - The autocomplete suggestion area is not optimized for mobile yet, working on it.
+
+  ***SPECIAL FILES****
+  1. dbh.php
+    - This is a database handler file. It creates the database.
+  2. dbsql.sql
+    - This file is a pure sql command file which creates all tables.
+  3. libcommon.php
+    - This script consists of functions that are accessed by many other scripts. For example, it consists a single function that inserts to all tables.
+    It also has validation function and others.
+  4. install.php
+    - This is the file that populated all the tables created by file mentioned in #2. This file should be executed before accessing index.php.
+    - Run this file by typing: php install.php  from a CMD/terminal.
+
+  ***NOTE**
+  My code is not heavely commented yet. This is because I keep changing certain functionalities several times. I will be adding more comments. 

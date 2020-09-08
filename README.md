@@ -5,9 +5,11 @@
 <pre>
 - project
   - app         <= [all scripts in this directory]
+    - libcommon.php
   - css
   - js
   - templates   <= [index.php and other templates are here]
+    - index.php
 - project.txt
 - README.md
 </pre>
@@ -45,22 +47,25 @@ This application has fully functionl login/logout system and ability to register
 
 You can now see the pre-populated data by navigating to relevant tabs/buttons. Note that you can see user data only after you login.
 
-**Search functionality**
-This feature is being built. The most complex search query fetches data from four tables.
+**Search functionality with auto-complete feature**
+A fully functional search feature has been added. This search pulls data from three tables (book, author, publisher) and displays relevant details from all the tables when a matching record is found. I have implemented an autocomplete feature where in which suggestions are pulled from a table if search pattern matches existing record.
 
 **Inserting data**
-From the front end, you can add data to user table by signing up. You can also insert data to all tables.
+From the front end, you can add(insert) data to user table by signing up. You can also add/insert data to all tables once you're logged in. Data insertion will only be done by admins. For now, everyone who is registered is able to add data.
 
 **Deleting data**
-From the front end, deleting a user from user table is possible. Deleting data from other tables in being built right now.
+From the front end, deleting data from all tables is possible. You've to be authorized to do so - thus this feature is only for  those who are logged in. As insertion, only admins will be able to perform this task later on.
 
 **Editing data**
-From front end, you can edit data for user table. This will be built for all tables in few days.
+All signed in users can edit data. Like the delete and insert features, this feature will be available only for admins, but for now a member can do so.
 
 **Dashboard**
-A dashboard layout is ready to be plugged with the functional part of the website. I have a little more work to do with that.
+A dashboard layout is ready to be plugged but not functional yet. I have a little more work to do with that.
 
-**Cart feature**
-This feature isn't ready yet.
-## Responsive Design
-The website site fully responsive. Menu bar and other parts of the website respond to the typical breaking point for the appropriate view port. Dashboard is responsive up until 768px only(so not friendly with extra small devices - old phones).
+**Comment and Cart feature**
+Tese features aren't fully functional yet.
+### <span style="color:#f77f00">Responsive Design</span>
+The website site fully responsive except the search area (I am thinking of changing the layout - not done yet). Menu bar and other parts of the website respond to the typical breaking point for the appropriate view port. Dashboard is responsive up until 768px only(so not friendly with extra small devices - old phones).
+
+#### <span style="color:#f77f00">Special files</span>
+These

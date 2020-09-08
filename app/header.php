@@ -17,6 +17,8 @@
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
         crossorigin="anonymous">
       </script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
   </head>
   </head>
   <body>
@@ -24,8 +26,9 @@
       <div class="content">
         <h1><a href="../templates/index.php"> BookStore</a></h1>
         <div class="links">
-          <input type="text" class="searchbox" placeholder="Search by Title, Author, or ISBN">
-          <a href="../app/search.php" class="btn-search">Search</a>
+
+          <!-- <input type="text" class="searchbox" id="search" placeholder="Search by Title, Author, or ISBN">
+          <a href="../app/search.php" class="btn-search">Search</a> -->
           <?php
             if(isset($_SESSION['useremail'])||isset($_SESSION['firstname'])){
               echo ' <a href="../app/signout.inc.php">Signout</a>';
@@ -35,7 +38,8 @@
               echo '<a name="signin-submit" href="../templates/signin.php">Signin</a>';
               echo '<a name="log-submit" href="../templates/signup.php">Signup</a>';
             }
-           ?>
+             ?>
+
           <a href="#">Cart<span class="cart-notify">0</span> </a>
         </div>
         <i class="material-icons menu button" onclick="collapse()">menu</i>
@@ -56,3 +60,72 @@
         <a href="#">Cart<span class="cart-notify">0</span></a>
       </div>
     </nav>
+
+    <div class="secondary-menu" id="secondary-menu">
+
+      <div id="link-wrapper">
+
+          <a href="../templates/author.php">Authors</a>
+          <a href="../templates/book.php">Books</a>
+          <a href="../templates/publisher.php">Publishers</a>
+          <a href="../templates/category.php">Categories</a>
+          <a href="../templates/genre.php">Genre</a>
+          <a href="../templates/comment.php">Comments</a>
+
+
+          <form class="search-from" action="../templates/searchResults.php" method="post">
+              <input type="text" name="search"  id="search" placeholder="Search ...">
+              <input type="submit" name="submit" value="Search">
+              <!-- <a href="../app/search.php" name="sumbit" class="btn-search-top" style="margin:15px 0px 0px -50px;border:none;"> <img src="../templates/imgs/search.png" style="margin:top:20px;" alt=""> </a> -->
+          </form>
+
+       </div>
+
+       <div id="search-result">
+         <div class=""></div>
+         <div class=""></div>
+         <div class=""></div>
+         <div class="actual-result" id="show-list">
+           <!-- <li> Dynamic search list will show up here</li> -->
+         </div>
+
+       </div>
+
+    </div>
+
+<?php
+
+
+
+  ?>
+  <script>
+    // AJAX call for autocomplete
+
+    $(document).ready(function () {
+      // Send Search Text to the server
+      $("#search").keyup(function () {
+        let searchText = $(this).val();
+        if (searchText != "") {
+          $.ajax({
+            url: "../app/search.php",
+            method: "post",
+            data: {
+              query: searchText,
+            },
+            success: function (response) {
+              $("#show-list").html(response);
+            },
+          });
+        } else {
+          $("#show-list").html("");
+        }
+      });
+      // Set searched text in input field on click of search button
+      $(document).on("click", "li", function () {
+        $("#search").val($(this).text());
+        $("#show-list").html("");
+      });
+    });
+
+
+    </script>

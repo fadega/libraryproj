@@ -3,7 +3,7 @@
  require '../app/dbh.php';
 
  try{
-   //Let's get .sql file with
+   //Let's get .sql file with the built in php function file_get_contents
    $sql = file_get_contents("../app/dbsql.sql");
    $conn->exec($sql);
    //echo "2. Table(s) creation: Success, Eight tables created!\n";
@@ -11,7 +11,10 @@
    echo " Connection failed ". $e->getMessage();
  }
 
- //inserting sample data
+ /*
+   This following blocks of code will populate the tables with sample data.
+
+ */
 
  try{
    //1/. Inserting sampple to user table

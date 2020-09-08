@@ -1,22 +1,20 @@
 <?php
-  require '../app/header.php';
-  require '../app/dbh.php';
+  require_once '../app/dbh.php';
 
- ?>
+  if (isset($_POST['query'])) {
+    $inpText = $_POST['query'];
+    $sql = 'SELECT title FROM book WHERE title LIKE :country';
+    $stmt = $conn->prepare($sql);
+    $stmt->execute(['country' => '%' . $inpText . '%']);
+    $result = $stmt->fetchAll();
 
-<div class="main-container">
-  <h2> Opps! What a shame!  </h2>
-  <p>Search functionality isn't set yet, however the following functionalities are ready</p>
-  <ul>
-    <li>Signup</li>
-    <li>Sigin</li>
-    <li>Sigin</li>
-    <li>Add users, authors, publishers, categories, genre and books</li>
-    <li>Displaying users only for logged admin</li>
-    <li>..and more</li>
-  </ul>
-
-</div>
-
-
- <php require '../app/footer.php';?>
+    if ($result) {
+      foreach ($result as $row) {
+        echo '<li>'.$row['title'].'</li>';
+        
+      }
+    } else {
+      echo '<p class="list-group-item border-1">No Record</p>';
+    }
+  }
+?>

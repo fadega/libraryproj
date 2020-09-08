@@ -1,39 +1,19 @@
 
 
-
-<style>
-.bodycontent{
-  display: grid;
-  grid-template-columns: 70% 30%;
-  grid-gap: 1em;
-}
-.bodycontent div{
-  background-color: #eee;
-  padding:30px;
-  border-radius: 3px;
-}
-.bodycontent div:nth-child(odd){
-  background-color: #ddd;
-}
-
-.bodycontent .one{
-  grid-column-start: 1;
-  grid-column-end:3;
-  padding:0;
-  margin:0 auto;
-
-}
-.bodycontent .one img{
-  width: 100%;
-  max-height: 700px;
-}
-
-</style>
-
-
-<div class="bodycontent">
-  <div class="one">
-      <img src="../templates/imgs/bookstore.jpg" alt="hero">
+<div class="hero-section" id="hero">
+  <div class="img-part">
+      <!-- <img src="../templates/imgs/bookstore.jpg" alt="hero"> -->
   </div>
+  <!-- This will be uncommented later -->
+  <!-- <div class="form-part">
+    <h5>Search by Author, title, ISBN or all</h5>
+    <form class="search" id="advsrchform" action="../app/search.php" method="post">
+      <input type="text" class="booksearch" id="advsearch" placeholder="Book title ...">
+      <input type="text" class="authorsearch" id="search" placeholder="Author name ... ">
+      <input type="text" class="isbnsearch" id="search" placeholder="ISBN number...">
+      <a href="../app/search.php" class="btn-search">Search</a>
+    </form>
 
-</div> <!--END WRAPPER -->
+  </div> -->
+
+</div>

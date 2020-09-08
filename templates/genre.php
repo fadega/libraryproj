@@ -83,7 +83,7 @@
         // echo '<pre>';
         // print_r($data);
         foreach($data as $row):?>
-          <tr> 
+          <tr>
 
             <td><?php echo $row['genre_id'];?></td>
             <td><?php echo  ucfirst($row['gname']);?></td>
@@ -109,6 +109,7 @@
 
 
            }//END of SESSION CHECK
+           include '../templates/placeholder.html';
           ?>
     </main>>
 

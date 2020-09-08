@@ -112,6 +112,7 @@ require '../app/dbh.php';
 
 
            }//END of SESSION CHECK
+        include '../templates/placeholder.html';
           ?>
     </main>>
 

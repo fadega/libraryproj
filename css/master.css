@@ -23,11 +23,75 @@ body{
     /* font-family: 'Source Sans Pro', sans-serif; */
     font-size:20px;
 
+    user-select: none;
+   -webkit-user-select: none;
+   -khtml-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+
 
 }
+/**** BEGIN HERO SECTION STYLE ****/
+
+#hero{
+  display:grid;
+  /* grid-template-columns: 2fr 1fr; */
+  display: flex;
+  height: 450px;
+  max-height: 450px;
+  margin-top:1em;
+  /* background: red; */
+  /**The two lines below are temporary**/
+  background: url("../templates/imgs/bookstore.jpg");
+  background-size: cover;
+
+}
+    #hero .img-part{
+      background: url("../templates/imgs/bookstore.jpg");
+      background-size: cover;
+
+    }
+    #hero .form-part{
+      width:90%;
+      margin:0 auto;
+      border: 2px solid #ccc;
+      padding:2rem;
+      border-radius: 0.3em;
+    }
+          #hero .form-part form{
+            display:grid;
+            grid-template-rows: repeat(1fr,3);
+            margin-top:2rem;
+          }
+                #hero .form-part form input[type=text]{
+                 margin:5px;
+                 border:none;
+                 border-bottom: 1px solid #ccc;
+                 padding:0.3em;
+                 font-size:1.1em;
+                 background:#e9ecef;
+                 outline:none;
+                }
+                #hero .form-part form a{
+                font-size: 1.8em;
+                background-color: #f77f00;
+                text-align: center;
+                padding:0.1em ;
+                border-radius:0.1em;
+                color:#fff;
+                width:150px;
+                padding:
+
+                }
+                #hero .form-part form a:hover{
+                background-color:#ccc;
+                color:var(--greenaple);
+                }
+
+/*** END HERO SECTION STYLE ***/
+
 
 .main-container{
-  /* background-color: red; */
   margin:0 auto;
   width:80%;
   padding:0 0.5rem 2rem 0.5rem;
@@ -82,36 +146,96 @@ body{
 /******** END TABLE STYLE ****/
 
 /******** START MAIN-LINKS STYLES ****/
-
+#secondary-menu{
+width: 80%;
+margin:0 auto;
+}
 #link-wrapper{
-  /* background:#ced4da; */
-  padding:2rem 1rem;
+  padding:0 1rem;
   width:100%;
+  margin:0 auto;
   display:flex;
   flex-direction: row;
 }
 #link-wrapper a{
-  padding:0.8rem;
+  padding:0;
   color:#00509d;
   flex:1;
-  border:1px solid #00509d;
-  margin:0.5%;
-  font-size:1.6rem;
+  margin:0.2%;
+  font-size:1.5rem;
   text-align: center;
-  border-radius: 4px;
+  border-bottom:1px solid #ccc;
+}
+
+#link-wrapper a:hover{
+  /* padding:0.8rem; */
+  color:var(--greenaple);
+  /* background:#00509d; */
 
 }
-#link-wrapper a:hover{
-  padding:0.8rem;
-  color:var(--greenaple);
-  background:#00509d;
+#link-wrapper input[type=text]{
+  margin:5px;
+  border:none;
+  border-bottom: 1px solid #ccc;
+  padding:0.3em;
+  font-size:1.1em;
+  background:#e9ecef;
+  outline:none;
 
+}
+#link-wrapper input[type=submit]{
+  background: #f77f00;
+  cursor:pointer;
+  color:#fff;
+  border:none;
+  padding:0.3em 1em;
+  border-radius: 1em;
+}
+#link-wrapper input[type=submit]:hover{
+  background: #e5e5e5;
+  color:var(--greenaple);
 }
 
 /******** END MAIN-LINKS STYLES ****/
 
 
+/*** BEGIN Search RESULT styles ***/
+#search-result{
+  display:grid;
+  grid-template-columns: 25% 25% 20% 28%;
+  list-style: none;
+}
+        #search-result div{
+          /* background:red; */
+          padding:0 0.4em;
 
+        }
+        #search-result .actual-result{
+            border-top:none;
+
+
+        }
+        #search-result .actual-result li{
+           cursor: pointer;
+        }
+        #search-result .actual-result li:hover{
+           background-color: #e5e5e5;
+           /* border-bottom:1px solid #3d405b; */
+        }
+
+/** End Search RESULT STYLES **/
+
+/*** BEGIN BOOK DETAIL STYLES**/
+#book-details{
+  background: #e5e5e5;
+  border:1px solid #ccc;
+  padding:1em;
+  width:18rem;
+  height: 15rem;
+}
+
+
+/*** END BOOK DETAILS STYLES ***/
 
 main{
     margin: 1rem auto;
@@ -247,6 +371,14 @@ input, label, button{
     padding: 50px 50px 50px 100px;
 
 }
+.placeholder{
+  margin-top:1rem;
+  background:#e5989b;
+  color:#fff;
+  font-size: 1.2em;
+  padding:2rem;
+}
+
 
 /*******************************
         Media Queries

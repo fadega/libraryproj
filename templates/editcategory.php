@@ -99,6 +99,7 @@
 
 
            }//END of SESSION CHECK
+           include '../templates/placeholder.html';
           ?>
     </main>>
 
