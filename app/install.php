@@ -1,9 +1,13 @@
 <?php
-
+/*
+  This is an important script, it should be executed before accessing index.php on the browser
+  To execute it, do the following on the cmd
+  php install.php
+*/
  require '../app/dbh.php';
 
  try{
-   //Let's get .sql file with the built in php function file_get_contents
+   //get .sql file with the built in php function file_get_contents and execute it.
    $sql = file_get_contents("../app/dbsql.sql");
    $conn->exec($sql);
    //echo "2. Table(s) creation: Success, Eight tables created!\n";
@@ -13,7 +17,7 @@
 
  /*
    This following blocks of code will populate the tables with sample data.
-
+  Note: it is recommended that you enter your own data instead of working with the sample data
  */
 
  try{

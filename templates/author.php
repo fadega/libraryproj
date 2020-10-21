@@ -1,37 +1,44 @@
 
 <?php
 
+/*
+    This script accepts information from user to be populate the author table
+    Note that only authorized users can insert data to author table
+*/
 require '../app/header.php';
 require '../app/dbh.php';
+require '../app/libcommon.php';
 
 ?>
 
 <main>
 
-  <?php if(isset($_SESSION['useremail'])||isset($_SESSION['emailId'])){?>
-
-        <?php
-          //check for error messages
+  <?php
+  //Check if a user is loggedin to be able to insert data to author table
+  if(isset($_SESSION['useremail'])||isset($_SESSION['emailId'])){
+            //check for error messages
           if(isset($_GET['error'])){
-            if($_GET['error']=="emptyfields"){
-              echo '<p style="color:red">All fields are required.</p>';
-            }else if($_GET['error']=="invaliddata"){
-              echo '<p style="color:red">Invalid data, check your entries.</p>';
-            }else if($_GET['error']=="invalidfname"){
-              echo '<p style="color:red">First name should not contain numbers or special characters</p>';
-            }else if($_GET['error']=="invalidlname"){
-              echo '<p style="color:red">Last name should not contain numbers or special characters</p>';
-            }else if($_GET['error']=="invalidEmail"){
-              echo '<p style="color:red">Invalid email.</p>';
-            }else if($_GET['error']=="authoralreadyexist"){
-              echo '<p style="color:red">Author with this email arlready exists.</p>';
-            }
+              if($_GET['error']=="emptyfields"){
+                  echo '<p style="color:red">All fields are required.</p>';
+              }else if($_GET['error']=="invaliddata"){
+                  echo '<p style="color:red">Invalid data, check your entries.</p>';
+              }else if($_GET['error']=="invalidfname"){
+                  echo '<p style="color:red">First name should not contain numbers or special characters</p>';
+              }else if($_GET['error']=="invalidlname"){
+                  echo '<p style="color:red">Last name should not contain numbers or special characters</p>';
+              }else if($_GET['error']=="invalidEmail"){
+                  echo '<p style="color:red">Invalid email.</p>';
+              }else if($_GET['error']=="authoralreadyexist"){
+                  echo '<p style="color:red">Author with this email arlready exists.</p>';
+              }
           }else if(isset($_GET['adding'])){
-            echo '<p style="color:green; margin-left:2rem;">Author added successfully!</p>';
+              echo '<p style="color:green; margin-left:2rem;">Author added successfully!</p>';
           }
 
 
          ?>
+
+         <!-- The form fields will accept user input -->
 
         <form name="my-form" action="../app/author.inc.php" method="post">
            <h1>Add Author</h1>
@@ -58,11 +65,11 @@ require '../app/dbh.php';
         </form>
 
         <br><hr><br>
+
         <h3>Authors-Table</h3>
 
         <table class="db-table">
         <tr>
-
             <th>ID </th>
             <th>First name </th>
             <th>Last name </th>
@@ -72,49 +79,42 @@ require '../app/dbh.php';
 
         <?php
 
-        $sql ='SELECT *FROM author';
+          //display data of author table if exist
+          $sql ='SELECT *FROM author';
+          $res = $conn->prepare($sql);
+          $res->execute();
+          $data = $res->fetchAll(PDO::FETCH_ASSOC);
 
-        $res = $conn->prepare($sql);
-        // $res = $conn->prepare('SELECT * FROM book');
-        $res->execute();
-        $data = $res->fetchAll(PDO::FETCH_ASSOC);
-        // echo '<pre>';
-        // print_r($data);
-        foreach($data as $row):?>
-          <tr>
+          foreach($data as $row):?>
+            <tr>
 
-            <td><?php echo $row['author_id'];?></td>
-            <td><?php echo $row['firstname'];?></td>
-            <td><?php echo $row['lastname'];?></td>
-            <td><?php echo $row['email'];?></td>
-            <td>
-               <a class="edit" href="../templates/editauthor.php?id=<?php echo $row['author_id'];?>">Edit</a>
-               <a class="delete" href="../app/deleteauthor.php?id=<?php echo $row['author_id'];?>">Delete</a>
-            </td>
-          </tr>
+              <td><?php echo $row['author_id'];?></td>
+              <td><?php echo $row['firstname'];?></td>
+              <td><?php echo $row['lastname'];?></td>
+              <td><?php echo $row['email'];?></td>
+              <td>
+                 <a class="edit" href="../templates/editauthor.php?id=<?php echo $row['author_id'];?>">Edit</a>
+                 <a class="delete" href="../app/deleteauthor.php?id=<?php echo $row['author_id'];?>">Delete</a>
+              </td>
+            </tr>
 
-        <?php endforeach; ?>
-        </table>
+          <?php endforeach; ?>
+          </table>
 
 
+<?php }else{
+      //if a user isn't signedin, s/he will see this
+         echo
+            '  <h2><br>Access denied ..</h2>
+               <p><br>Oops! You are not authorized. Please signin
+               <a href="../templates/signin.php">here</a>
+               <span> Or singup <a href="../templates/signup.php">here</a> </span></p>';
 
+         }//END of SESSION CHECK(Login check)
 
-
-
-      <?php }else{
-        //if a user isn't signedin, s/he will see this
-
-           echo
-              '  <h2><br>Access denied ..</h2>
-                 <p><br>Oops! You are not authorized. Please signin
-                 <a href="../templates/signin.php">here</a>
-                 <span> Or singup <a href="../templates/signup.php">here</a> </span></p>';
-
-
-           }//END of SESSION CHECK
         include '../templates/placeholder.html';
           ?>
-    </main>>
+    </main>
 
 
 <?php require '../app/footer.php';?>

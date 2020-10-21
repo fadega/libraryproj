@@ -1,11 +1,13 @@
 <?php
+/*
+	This script populates the publisher table
 
-
+*/
 	if(ISSET($_POST['submit'])){
     require_once 'dbh.php';
 		require_once '../app/libcommon.php';
 
-    //get user input
+    //get user input (covert all user input to small letters - for seach purposes)
 		$publisher  =  strtolower($_POST['publisher']);
 		$city       =  strtolower($_POST['city']);
 		$country    =  strtolower($_POST['country']);

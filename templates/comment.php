@@ -1,9 +1,16 @@
 
-<?php  require '../app/header.php';
-       require '../app/dbh.php';
+<?php
+    /*
+        This script was to supposed to emplement the rating/commenting section which I discontinued
 
-       $stmt = $conn->prepare('SELECT *FROM book');
-       $stmt->execute();
+    */
+     require '../app/header.php';
+     require '../app/dbh.php';
+
+
+
+     $stmt = $conn->prepare('SELECT *FROM book');
+     $stmt->execute();
 ?>
 
 <main>

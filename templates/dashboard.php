@@ -1,47 +1,157 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DBoard</title>
-    <link rel="stylesheet" href="../css/dashboard.css">
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.min.js"
-      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-      crossorigin="anonymous"></script>
-  </head>
-  <body>
+
+
+<?php
+  /*
+      This script implements partial dashboard, this is only shown to loggedin users
+  */
+    require '../app/header.php';
+    require '../app/dbh.php';
+    require '../app/libcommon.php';
+?>
+
+
     <div id="dashboard">
 
         <div id="dashside-left">
             <h2>BOOKSTORE</h2>
-            <a href="#">Users</a>
-            <a href="#">Authors</a>
-            <a href="#">Book</a>
-            <a href="#">Categories</a>
-            <a href="#">Publishers</a>
-            <a href="#">Genres</a>
-            <a href="#">Orders</a>
-            <a href="#">Comments</a>
+            <button class="dash-btn" id="user_btn" onclick="displayData(event, 'user')">Users</button>
+            <button class="dash-btn" id="author_btn" onclick="displayData(event, 'author')">Authors</button>
+            <button class="dash-btn" id="books_btn" onclick="displayData(event, 'book')">Books</button>
+            <button class="dash-btn" id="category_btn" onclick="displayData(event, 'category')">Categores</button>
+            <button class="dash-btn" id="publisher_btn" onclick="displayData(event, 'publisher')">Publishers</button>
+            <button class="dash-btn" id="genre_btn" onclick="displayData(event, 'genre')">Genre</button>
+            <button class="dash-btn" id="order_btn" onclick="displayData(event, 'order')">Orders</button>
+            <button class="dash-btn" id="comment_btn" onclick="displayData(event, 'comment')">Comments</button>
+
         </div><!--END dashside-left-->
 
         <div id="dashside-right">
-            <div class="right-top">
-              <input type="text" class="searchBox" name="searchBox"  placeholder="Search ....">
-              <a href="#">Search</a>
-              <a href="#">Fadega</a>
-              <a href="#">Logout</a>
-            </div> <!--END top-right-->
+
 
             <div id="middle" class="right-middle">
-              <p>Automatic content to be placed here ... </p>
-              <div class="users"></div>
-              <div class="authors"></div>
-              <div class="books"></div>
-              <div class="Categories"></div>
-              <div class="users"></div>
-              <div class="users"></div>
-              <div class="users"></div>
+              <!-- <p>Automatic content to be placed here ... </p> -->
+              <div class="users">
+                  <h3>Users</h3>
+                  <table class="db-table">
+                    <tr>
+                        <th> ID </th>
+                        <th> First Name </th>
+                        <th> Last Name </th>
+                        <th> Email </th>
+                        <th> Level </th>
+                        <th> Action </th>
+                    </tr>
+                    <?php
+
+                    $res = $conn->prepare('SELECT * FROM user');
+                    $res->execute();
+                    $data = $res->fetchAll(PDO::FETCH_ASSOC);
+
+
+                   foreach($data as $row):?>
+                        <tr>
+                          <td><?php echo $row['user_id'];?></td>
+                          <td><?php echo $row['firstname'];?></td>
+                          <td><?php echo $row['lastname'];?></td>
+                          <td><?php echo $row['email'];?></td>
+                          <td><?php echo $row['level'];?></td>
+                          <td>
+                             <a class="edit" href="editUser.php?id=<?php echo $row['user_id'];?>">Edit</a>
+                             <a class="delete" href="deleteUser.php?id=<?php echo $row['user_id'];?>">Delete</a>
+                          </td>
+                        </tr>
+
+                      <?php endforeach; ?>
+                    </table>
+
+              </div>
+              <div class="authors">
+                <h3>Authors</h3>
+                <table class="db-table">
+                <tr>
+
+                    <th>ID </th>
+                    <th>First name </th>
+                    <th>Last name </th>
+                    <th>Email </th>
+                    <th>Action</th>
+                </tr>
+
+                <?php
+
+                $sql ='SELECT *FROM author';
+
+                $res = $conn->prepare($sql);
+                // $res = $conn->prepare('SELECT * FROM book');
+                $res->execute();
+                $data = $res->fetchAll(PDO::FETCH_ASSOC);
+                // echo '<pre>';
+                // print_r($data);
+                foreach($data as $row):?>
+                  <tr>
+                    <td><?= $row['author_id'];?></td>
+                    <td><?= $row['firstname'];?></td>
+                    <td><?= $row['lastname'];?></td>
+                    <td><?= $row['email'];?></td>
+                    <td>
+                       <a class="edit" href="../templates/editauthor.php?id=<?php echo $row['author_id'];?>">Edit</a>
+                       <a class="delete" href="../app/deleteauthor.php?id=<?php echo $row['author_id'];?>">Delete</a>
+                    </td>
+                  </tr>
+
+                <?php endforeach; ?>
+                </table>
+
+              </div>
+
+
+              <div class="books">
+                <h3>Books</h3>
+                <table class="db-table">
+                  <tr>
+                      <th>Title </th>
+                      <th>Author </th>
+                      <th>Publisher </th>
+                      <th>Category </th>
+                      <th>Genre </th>
+                      <th>Year</th>
+                      <th>Action</th>
+                  </tr>
+
+                <?php
+                // This query will display books, their publishers, categories, genre and price from different tables
+                $sql ='SELECT book_id,title ,year, price, firstname, pname, cname, gname
+                                FROM book b, author a, publisher p, category c, genre g
+                                WHERE b.author_id = a.author_id AND
+                                      b.publisher_id = p.publisher_id AND
+                                      b.category_id = c.category_id AND
+                                      b.genre_id = g.genre_id';
+
+                $res = $conn->prepare($sql);
+                // $res = $conn->prepare('SELECT * FROM book');
+                $res->execute();
+                while($row = $res->fetch(PDO::FETCH_ASSOC)){?>
+                    <td><?=  $row['title'];?></td>
+                    <td><?=  $row['firstname'];?></td>
+                    <td><?=  $row['pname'];?></td>
+                    <td><?=  $row['cname'];?></td>
+                    <td><?=  $row['gname'];?></td>
+                    <td><?= '$'.$row['year'];?></td>
+                    <td>
+                       <a class="edit" href="../templates/editbook.php?id=<?php echo $row['book_id'];?>">Edit</a>
+                       <a class="delete" href="../app/deletebook.php?id=<?php echo $row['book_id'];?>">Delete</a>
+                    </td>
+                  </tr>
+                <?php  }?>
+                </table>
+              </div>
+
+
+              <div class="Categories">Categpries..</div>
+              <div class="publishers">Publishers ..</div>
+              <div class="orders">orders ..</div>
+              <div class="genre">Genre ..</div>
+              <div class="comments">Comments ..</div>
             </div> <!--END right-middle-->
 
 
@@ -88,10 +198,7 @@
               </div>
             </div> <!--END bottom-right-->
         </div><!--END dashside-right-->
-        <?php include '../templates/placeholder.html';?>
+
     </div><!--END dashboard-->
 
-
-
-
-</html>
+<script src='../js/main.js'></script>

@@ -1,5 +1,7 @@
 <?php
-
+/*
+    This script deletes user from the user table
+*/
 require '../app/dbh.php';
 if(isset($_GET['id'])){
   $id = $_GET['id'];

@@ -3,6 +3,12 @@
 require '../app/header.php';
 require '../app/dbh.php';
 
+/*
+This script accepts user input and passes it to book.inc.php to insert to the book table.
+It also displays books which are already in the table
+
+
+*/
 
 $authStmt = $conn->prepare('SELECT *FROM author');
 $authStmt->execute();
@@ -24,9 +30,8 @@ $genStmt->execute();
 <main>
   <?php
     //Check if user is authorized to access the page
-    if(isset($_SESSION['useremail'])||isset($_SESSION['emailId'])){?>
+    if(isset($_SESSION['useremail'])||isset($_SESSION['userId'])){
 
-          <?php
         //  check for error messages
           if(isset($_GET['error'])){
             if($_GET['error']=="emptyfields"){
@@ -47,8 +52,8 @@ $genStmt->execute();
 
 
          ?>
-
-        <form name="my-form" action="../app/book.inc.php" method="post">
+         <!-- This form is submitted to book.inc.php for data to be inserted to table book -->
+        <form name="my-form" action="../app/book.inc.php" method="post" enctype="multipart/form-data">
           <h1>Add a book </h1>
             <div class="form-box">
                 <label for="title">Title</label>
@@ -117,13 +122,16 @@ $genStmt->execute();
             </div>
 
             <div class="form-box">
-                <label for="cover">Cover</label>
-                <input type="text" id="cover" name="cover" placeholder="Cover /upload" >
+                <label for="cover">Cover Photo</label>
+                <!-- <input type="text" id="cover" name="cover" placeholder="Cover /upload" > -->
+                <input type="file" name="image">
             </div>
 
             <div class="form-box">
                 <label for="price">Price</label>
-                <input type="text" id="price" name="price" placeholder="$Price" required>
+              <input type="text" id="price" name="price" placeholder="$Price" required>
+
+
             </div>
 
             <div class="form-box">
@@ -143,7 +151,7 @@ $genStmt->execute();
         </form>
 
         <br>
-      <h3>Books-Table</h3>
+      <h3>Books--Table</h3>
       <table class="db-table">
         <tr>
 
@@ -151,9 +159,7 @@ $genStmt->execute();
             <th>Author </th>
             <th>Publisher </th>
             <th>Category </th>
-            <th>Genre</th>
             <th>Year</th>
-            <!-- <th>Price</th> -->
             <th>Action</th>
         </tr>
 
@@ -167,15 +173,15 @@ $genStmt->execute();
                             b.genre_id = g.genre_id';
 
       $res = $conn->prepare($sql);
-      // $res = $conn->prepare('SELECT * FROM book');
       $res->execute();
+      //This bloock will display book details and give an option for authorized users to either update
+      //or delete books
       while($row = $res->fetch(PDO::FETCH_ASSOC)){?>
           <td><?= $row['title'];?></td>
           <td><?=  $row['firstname'];?></td>
           <td><?=  $row['pname'];?></td>
           <td><?=  $row['cname'];?></td>
-          <td><?=  $row['gname'];?></td>
-          <td><?= '$'.$row['price'];?></td>
+          <td><?= '$'.$row['year'];?></td>
 
           <td>
              <a class="edit" href="../templates/editbook.php?id=<?php echo $row['book_id'];?>">Edit</a>
@@ -187,65 +193,18 @@ $genStmt->execute();
       </table>
 
 
-
-
-
       <?php }else{
         //if a user isn't signedin, s/he will see this
-
            echo
               '
                  <p><br> You are not signed in,but you can still see books. Please signin
                  <a href="../templates/signin.php">here</a>
                  <span> Or singup <a href="../templates/signup.php">here</a> </span></p>';
 
-
-
+            include '../templates/booklist.php';
               ?>
-
         <br>
-      <h3>Books-Table</h3>
-      <table class="db-table">
-        <tr>
 
-            <th>Title </th>
-            <th>Author </th>
-            <th>Publisher </th>
-            <th>Category </th>
-            <th>Genre</th>
-            <th>Year</th>
-            <!-- <th>Price</th> -->
-            <th>Action</th>
-        </tr>
-
-      <?php
-      // This query will display books, their publishers, categories, genre and price from different tables
-      $sql ='SELECT book_id,title ,year, price, firstname, pname, cname, gname
-                      FROM book b, author a, publisher p, category c, genre g
-                      WHERE b.author_id = a.author_id AND
-                            b.publisher_id = p.publisher_id AND
-                            b.category_id = c.category_id AND
-                            b.genre_id = g.genre_id';
-
-      $res = $conn->prepare($sql);
-      // $res = $conn->prepare('SELECT * FROM book');
-      $res->execute();
-      while($row = $res->fetch(PDO::FETCH_ASSOC)){?>
-          <td><?= $row['title'];?></td>
-          <td><?=  $row['firstname'];?></td>
-          <td><?=  $row['pname'];?></td>
-          <td><?=  $row['cname'];?></td>
-          <td><?=  $row['gname'];?></td>
-          <td><?= '$'.$row['price'];?></td>
-
-          <td>
-             <a class="edit" href="../templates/editbook.php?id=<?php echo $row['book_id'];?>">Edit</a>
-             <a class="delete" href="../app/deletebook.php?id=<?php echo $row['book_id'];?>">Delete</a>
-          </td>
-        </tr>
-      <?php  }?>
-
-      </table>
 
 
     <?php } // END of else-check  for the SESSION

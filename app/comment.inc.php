@@ -1,5 +1,9 @@
 <?php
 
+ /*
+		This script was an attempt to add comment section for users to rate or comment on books,
+		I have discontinued the feature due to its complexity
+ */
 
 	if(isset($_POST['submit'])){
     require_once '../app/dbh.php';

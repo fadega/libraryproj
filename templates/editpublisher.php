@@ -1,5 +1,10 @@
 
-<?php  require '../app/header.php';
+<?php
+    /*
+        This script enables authorized users to pass data to editpulisher.inc.php script for editing/updating
+        records of publishers. It also displays publisher details if they exist
+    */
+    require '../app/header.php';
     require '../app/dbh.php';
 
     $id= $_GET['id'];
@@ -17,8 +22,8 @@
 <main>
 
   <?php
-    //Check if user is authorized to access the page
-    if(isset($_SESSION['useremail'])||isset($_SESSION['emailId'])){?>
+    //Check if user is authorized to perfom this action
+    if(isset($_SESSION['useremail'])||isset($_SESSION['userId'])){?>
 
 
         <?php
@@ -77,14 +82,15 @@
 
         <?php
 
+        /*
+          The code block below will fetch data from publisher table and display
+          it on a table format if it exists. it also gives an option to delete/update if you are loggedin
+        */
         $sql ='SELECT *FROM publisher';
-
         $res = $conn->prepare($sql);
-        // $res = $conn->prepare('SELECT * FROM book');
         $res->execute();
         $data = $res->fetchAll(PDO::FETCH_ASSOC);
-        // echo '<pre>';
-        // print_r($data);
+
         foreach($data as $row):?>
           <tr>
 

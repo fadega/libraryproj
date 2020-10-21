@@ -1,6 +1,8 @@
 <?php
 
-
+/*
+this script updates the publisher table
+*/
 if(isset($_POST['publisher'])&& isset($_POST['city']) && isset($_POST['country']) && isset($_POST['updatepublisher'])){
         // require '../templates/libcommon.php';
         require '../app/dbh.php';

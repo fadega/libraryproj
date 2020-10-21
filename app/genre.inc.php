@@ -1,11 +1,13 @@
 <?php
 
-
+/*
+	This script populates the genre table
+*/
 	if(ISSET($_POST['submit-genre'])){
     require_once 'dbh.php';
 		require_once '../app/libcommon.php';
 
-    //get user input
+    //get user input from the frontend(fields)
 		$genre     =  strtolower($_POST['genre']);
 		$category  =  $_POST['category'];
 
@@ -19,30 +21,29 @@
 		   header("Location:../templates/genre.php?error=".$error);
 			 exit();
 	  }else {
-  			//call a function that checks if the user already exists
+				//Check if this genre is already inserted
 				$query = "SELECT  *FROM `genre` WHERE gname = :unique";
 				$exist = checkRecord($query, $genre);
 
-			if($exist){
-					print_r($exist);
-          header("Location:../templates/genre.php?error=genrealreadyexists");
-          exit();
-        }else{
-             try{
-							 //call function to insert data
-								insertData("INSERT INTO `genre` (gname, category_id) VALUES(:name, :category_id)", array(
-									':name'=>$genre,':category_id'=>$category));
+				if($exist){
+						//if genre exist in the table no need to insert it again
+	          header("Location:../templates/genre.php?error=genrealreadyexists");
+	          exit();
+	        }else{
+	             try{
+								 //if genre isn't in the genre table, call a function to insert the data
+									insertData("INSERT INTO `genre` (gname, category_id) VALUES(:name, :category_id)", array(
+										':name'=>$genre,':category_id'=>$category));
+			            header('Location:../templates/genre.php?added=success');
 
+	        }catch(Exception $e){
+		            header("Location:../templates/genre.php?error=parameterIssue&PDOMessage=".$e->getMessage());
+		            exit();
+	          }
+	          //close connection
+	            $conn = null;
 
-		            header('Location:../templates/genre.php?added=success');
-        }catch(Exception $e){
-	            header("Location:../templates/genre.php?error=parameterIssue&PDOMessage=".$e->getMessage());
-	            exit();
-          }
-          //close connection
-            $conn = null;
-
-        }
+	        }
 
     } //End of Error checker if block
 

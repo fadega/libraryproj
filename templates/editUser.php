@@ -1,7 +1,12 @@
 
-<?php  require '../app/header.php';
+<?php
+    /*
+    This script enables authorized users to update/edit user data.
+
+    */
+    require '../app/header.php';
     require '../app/dbh.php';
-  // require '../templates/libcommon.php';
+
     $id= $_GET['id'];
 
    //To push data to the textfields from

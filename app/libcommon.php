@@ -1,7 +1,14 @@
 <?php
+ /**
+  * libcommon.php: this script contains my functions that interact with different parts of the web app.
+  * It consists of functions that perform many tasks including userdata validation, insertion of data to all tables,
+  */
 
-require_once 'dbh.php';
-
+  /* This function will enter data to any table specified in the query parameter */
+function insertData($query, $params=array()){
+      $stmt = $GLOBALS['conn']->prepare($query);
+      $stmt->execute($params);
+}
 
 //This function validates user detailss
 function validateUser($firstname, $lastname, $email, $password,$repatePass){
@@ -28,19 +35,19 @@ function validateUser($firstname, $lastname, $email, $password,$repatePass){
 //This function checks if a record exists(user, author, publisher, etc ..)
 function checkRecord($query, $uniqueField){
       try{
-        $stmt = $GLOBALS['conn']->prepare($query);
-        $stmt->bindValue(':unique', $uniqueField);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+          $stmt = $GLOBALS['conn']->prepare($query);
+          $stmt->bindValue(':unique', $uniqueField);
+          $stmt->execute();
+          $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
       }catch(Exception $e){
-        //echo "ISSUE PREPARING STATEMENT : ".$e->getMessage();
-        header("Location:../templates/book.php?error=sqlerror&Message=".$e->getMessage());
-        exit();
+          //echo "ISSUE PREPARING STATEMENT : ".$e->getMessage();
+          header("Location:../templates/book.php?error=sqlerror&Message=".$e->getMessage());
+          exit();
       }
       if(!empty($result)){
-        return $result;
-        // return true;
+          return $result;
+          // return true;
       }else{
         return false;
       }
@@ -48,11 +55,6 @@ function checkRecord($query, $uniqueField){
 }// ****END of  userExit function **//
 
 
-/* This function will enter data to any table specified in the query parameter */
-function insertData($query, $params=array()){
-      $stmt = $GLOBALS['conn']->prepare($query);
-      $stmt->execute($params);
-}
 
 /**    Validate author details  **/
 function validateAuthor($firstname, $lastname, $email){
@@ -127,9 +129,9 @@ function validateBook($title,$ISBN,$year,$price){
 //validate comment
 function  validateComment($comment, $user_id, $book_id){
       $error ="";
-      if(empty($comment) || empty($category)){
+      if(empty($comment) || empty($user_id)||empty($book)){
         $error = "emptyfields";
-      }else if(!preg_match('/^[a-zA-Z\s]+$/',$genre) ){
+      }else if(!preg_match('/^[a-zA-Z\s]+$/',$comment) ){
         $error = "invaliddata";
       }
 

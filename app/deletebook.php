@@ -1,11 +1,12 @@
 <?php
-
+/*
+ This script deletes an a book from the book table
+*/
 require '../app/dbh.php';
 
 if(isset($_GET['id'])){
+  //get the passed id of the book to be deleted
   $id = $_GET['id'];
-
-  if(isset($_SESSION['useremail'])||isset($_SESSION['emailId'])){
 
       $sql = 'DELETE FROM book WHERE book_id = :id';
 
@@ -14,19 +15,19 @@ if(isset($_GET['id'])){
 
        $stmt->execute();
 
-       // return $stmt->rowCount();
+       // check if affected rows is greater than zero
        $count = $stmt->rowCount();
-       header('Location:../templates/book.php?delete=success&deletedid='.$id);
-       exit();
-     }else{
-
-         echo "<script>alert('Not authorized to peroform this action - sign in please!');
-                   document.location='../templates/index.php'</script>";
-
-
+       if($count>0){
+         header('Location:../templates/book.php?delete=success&deletedid='.$id);
+         exit();
+       }else{
+         echo '<script>alert("Book not removed!")</script>';
+         header('Location:../templates/book.php');
+         exit();
        }
 
 }else{
+  //if a deleted was attempted from a forbidden url
   header("Location:../templates/book.php?error=illegal-delete-request");
   exit();
 }

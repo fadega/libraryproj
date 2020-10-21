@@ -6,7 +6,7 @@
 
 html{
     box-sizing: border-box;
-    font-size: 17px;
+    font-size: 20px;
     line-height: 1.6;
     font-family: 'Source Sans Pro', sans-serif, Segoe UI, Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     color: #878787;
@@ -21,7 +21,7 @@ body{
     margin:0 auto;
     padding:0;
     /* font-family: 'Source Sans Pro', sans-serif; */
-    font-size:20px;
+    font-size:17px;
 
     user-select: none;
    -webkit-user-select: none;
@@ -68,12 +68,12 @@ body{
                  border:none;
                  border-bottom: 1px solid #ccc;
                  padding:0.3em;
-                 font-size:1.1em;
+                 /* font-size:1.1em; */
                  background:#e9ecef;
                  outline:none;
                 }
                 #hero .form-part form a{
-                font-size: 1.8em;
+                /* font-size: 1.8em; */
                 background-color: #f77f00;
                 text-align: center;
                 padding:0.1em ;
@@ -95,6 +95,7 @@ body{
   margin:0 auto;
   width:80%;
   padding:0 0.5rem 2rem 0.5rem;
+  position: relative;
 
 }
 
@@ -126,20 +127,22 @@ body{
   color: white;
   text-align: center;
 }
-.db-table .delete{
+ .db-table .delete{
+  /* font-size:0.2em; */
   color:red;
   background:#d62828;
   color:white;
-  padding:0.3em 0.3em;
+  padding:0.2em 0.2em;
   border-radius: 3px;
+
 
 }
 .db-table .edit{
-
+ /* font-size:0.2em; */
   margin-right:15px;
   background:#3a86ff;
   color:#fff;
-  padding:0.3em 0.3em;
+  padding:0.2em 0.2em;
   border-radius: 3px;
 }
 
@@ -162,7 +165,7 @@ margin:0 auto;
   color:#00509d;
   flex:1;
   margin:0.2%;
-  font-size:1.5rem;
+  /* font-size:1.5rem; */
   text-align: center;
   border-bottom:1px solid #ccc;
 }
@@ -178,7 +181,7 @@ margin:0 auto;
   border:none;
   border-bottom: 1px solid #ccc;
   padding:0.3em;
-  font-size:1.1em;
+  /* font-size:1.1em; */
   background:#e9ecef;
   outline:none;
 
@@ -202,7 +205,8 @@ margin:0 auto;
 /*** BEGIN Search RESULT styles ***/
 #search-result{
   display:grid;
-  grid-template-columns: 25% 25% 20% 28%;
+  /* grid-template-columns: 25% 25% 20% 28%; */
+  grid-template-columns: 80% 20%;
   list-style: none;
 }
         #search-result div{
@@ -220,22 +224,128 @@ margin:0 auto;
         }
         #search-result .actual-result li:hover{
            background-color: #e5e5e5;
+
            /* border-bottom:1px solid #3d405b; */
         }
 
 /** End Search RESULT STYLES **/
 
 /*** BEGIN BOOK DETAIL STYLES**/
-#book-details{
+#book-searched{
   background: #e5e5e5;
   border:1px solid #ccc;
   padding:1em;
-  width:18rem;
-  height: 15rem;
+  width:250px;
+  height: 360px;
+}
+     #book-searched .addtocart{
+       padding:0.5em;
+       background-color:var(--greenaple);
+       font-size:1em;
+       color:#000;
+       margin-top: 10px;
+       border:none;
+       cursor: pointer;
+     }
+     #book-searched .addtocart:hover{
+      background-color:#118ab2;
+      color: #fff;
+     }
+
+
+
+.book-container {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  padding: 10px;
+  grid-gap: 1em;
+}
+.book-item {
+  border: 1px solid rgba(0, 0, 0, 0.8);
+
+  padding: 0.5em;
+
+
 }
 
+.buy {
+  color:#fff;
+  background: #264653;
+  padding:0.3em 0.4em;
+  margin-right: 5px;
+  border-radius: 3px;
+  font-size:17px;
+  border:none;
+}
+.buy:hover{
+  background:#6d6875;
+}
+
+.checkout-staff{
+  display: grid;
+  grid-template-columns: 30% 30% 30% 10%;
+  padding: 10px;
+  grid-gap: 1em;
+}
+#checkout{
+
+  visibility: hidden;
+}
+.responsive {
+  max-width: 80%;
+  height: auto;
+}
 
 /*** END BOOK DETAILS STYLES ***/
+
+/** Advanced Search **/
+.advanced-search{
+  background:var(--applegrey);
+  border:1px solid #333;
+  width: 40%;
+  margin-left:60%;
+  margin-top:10px;
+  padding:0.2em;
+  font-size:1.2em;
+
+
+}
+    .label-fields{
+      display:grid;
+      grid-template-columns: 30% 70%;
+      grid-gap:3px;
+    }
+    .labels{
+      font-size:1.1em;
+      padding:0.2em;
+      border:none;
+      margin:5px;
+    }
+    .fields input[type=text]{
+      font-size:1em;
+      padding:0.1em 0.2em;
+      border:none;
+      width:90%;
+      margin:4px;
+      outline: none;
+      color:#333;
+
+    }
+    .advanced-search  input[type=submit]{
+      margin-left:73%;
+      padding:5px;
+      font-size:1.5em;
+      color:#fff;
+      background:var(  --greenaple);
+      border:none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    .advanced-search  input[type=submit]:hover{
+      background: var(--brightorange);
+      color:#000;
+    }
+
 
 main{
     margin: 1rem auto;
@@ -250,13 +360,18 @@ main form{
 
 }
 
-
+.cart-info{
+  width:250px;
+  background:var(--greenaple);
+  color:#fff;
+  padding:0.3em;
+}
 /*********************
         Form
 *********************/
 input, label, button{
     padding: 0.2rem 1rem;
-    font-size: 1.2rem;
+    /* font-size: 1.2rem; */
     color: inherit;
 }
 .form-box{
@@ -276,13 +391,13 @@ input, label, button{
 
 }
 .form-box select option{
-  font-size: 1.2rem;
+  /* font-size: 1.2rem; */
   color: inherit;
   color: #878787;
 }
 
 #condition, #category_id, #author_id, #publishers_id, #genre_id,#comment,#book_id{
-  font-size: 1.2rem;
+  /* font-size: 1.2rem; */
   color: inherit;
   color: #878787;
   padding: 0.3em 0.6em;
@@ -352,7 +467,7 @@ input, label, button{
 #modal-content .close{
   position: absolute;
   top: 0;
-  font-size: 40px;
+  /* font-size: 40px; */
   right: 15px;
   transform: rotate(45deg);
   cursor: pointer;
@@ -375,7 +490,7 @@ input, label, button{
   margin-top:1rem;
   background:#e5989b;
   color:#fff;
-  font-size: 1.2em;
+  /* font-size: 1.2em; */
   padding:2rem;
 }
 
@@ -421,10 +536,51 @@ input, label, button{
         margin-left: 9rem;
     }
 
+
 }
 /**** ----- LOWER BUTTON STYLES ------***/
 
 @media only screen and (max-width:768px){
     #link-wrapper{display: flex;flex-direction: column;}
+    #search-result{
+      display:grid;
+      /* grid-template-columns: 25% 25% 20% 28%; */
+      grid-template-columns:3% 70%;
+      list-style: none;
+    }
+    #search{
+      width:70%;
+    }
+    .book-item {
+      border: none;
+      padding: 3px;
 
+
+    }
+
+    .book-container {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      padding: 10px;
+      grid-gap: 1em;
+    }
+
+
+
+}
+
+.search-book-container{
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  padding: 10px;
+  grid-gap: 1em;
+}
+
+@media only screen and (max-width:900px){
+  .book-container {
+    display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;;
+    padding: 10px;
+    grid-gap: 1em;
+  }
 }

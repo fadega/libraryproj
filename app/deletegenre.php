@@ -1,7 +1,10 @@
 <?php
-
+/*
+ This script deletes an a genre from the genre table
+*/
 require '../app/dbh.php';
 if(isset($_GET['id'])){
+  //get the id of the genre to be deleted
   $id = $_GET['id'];
 
       $sql = 'DELETE FROM genre WHERE genre = :id';
@@ -11,10 +14,17 @@ if(isset($_GET['id'])){
 
        $stmt->execute();
 
-       // return $stmt->rowCount();
+       // check the number of the affected rows
        $count = $stmt->rowCount();
-       header('Location:../templates/genre.php?delete=success&deletedid='.$id);
-       exit();
+       if($count>0){
+         header('Location:../templates/genre.php?delete=success&deletedid='.$id);
+         exit();
+       }else{
+         echo '<script>alert("Genre not removed!")</script>';
+         header('Location:../templates/genre.php');
+         exit();
+       }
+
 
 }else{
   header("Location:../templates/genre.php?error=illegal-delete-request");

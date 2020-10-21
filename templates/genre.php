@@ -1,19 +1,22 @@
 
-<?php  require '../app/header.php';
-       require '../app/dbh.php';
+<?php
+  /*
+  This script enables authorized users to pass data to editgenre.inc.php script for editing/updating
+  records of publishers. It also displays publisher details if they exist
+  */
+   require '../app/header.php';
+   require '../app/dbh.php';
 
-       $stmt = $conn->prepare('SELECT *FROM category');
-       $stmt->execute();
-       // $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
-       // echo '<pre>';
-       // print_r($res);
+   $stmt = $conn->prepare('SELECT *FROM category');
+   $stmt->execute();
+
 ?>
 
 
 <main>
 
   <?php
-    //Check if user is authorized to access the page
+    //Check if user is authorized to perfom this task
     if(isset($_SESSION['useremail'])||isset($_SESSION['emailId'])){?>
 
 
@@ -71,17 +74,17 @@
         </tr>
 
         <?php
-
+        /*
+          The code block below will fetch data from genre table and display
+          it on a table format if it exists. it also gives an option to delete/update if you are loggedin
+        */
         $sql ='SELECT genre_id, gname, cname
                         FROM genre g, category c
                         WHERE g.category_id = c.category_id';
 
         $res = $conn->prepare($sql);
-        // $res = $conn->prepare('SELECT * FROM book');
         $res->execute();
         $data = $res->fetchAll(PDO::FETCH_ASSOC);
-        // echo '<pre>';
-        // print_r($data);
         foreach($data as $row):?>
           <tr>
 

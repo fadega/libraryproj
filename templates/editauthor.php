@@ -1,6 +1,9 @@
 
 <?php
-
+/*
+ This script enables authorized users to pass data for edits/updates.
+ It also displays author information for loggedin users
+*/
 require '../app/header.php';
 require '../app/dbh.php';
 
@@ -17,11 +20,13 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
 <main>
 
-  <?php if(isset($_SESSION['useremail'])||isset($_SESSION['emailId'])){?>
+  <?php
+  //check if user is authorized/loggedin to perfom this task
+  if(isset($_SESSION['useremail'])||isset($_SESSION['userId'])){?>
 
         <?php
 
-        //Update related error checks and messages
+        //check for any errors that are returned from the editauthor.inc.phps
           if(isset($_GET['authorupdate'])){
             if(GET['authorupdate']=="success"){
               echo '<p style="color:green">Author details updated successfully!</p>';

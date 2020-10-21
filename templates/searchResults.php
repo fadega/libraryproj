@@ -1,16 +1,15 @@
 <?php
+
+  /*
+    This is the page that display search results for the simple search. This is
+    linked with the autocomplete search feature. The search is based on book title
+  */
   require_once '../app/dbh.php';
 
   if (isset($_POST['submit'])) {
     $title = $_POST['search'];
 
-    //$sql = 'SELECT * FROM book WHERE title = :title';
-    // $sql ="SELECT book_id,title ,year, price, firstname, pname
-    //                 FROM book b, author a, publisher p
-    //                 WHERE b.author_id = a.author_id AND
-    //                       b.publisher_id = p.publisher_id AND
-    //                       b.title =b.title";
-
+    // query the database with data that the user has entered
     $sql = "SELECT *
                   FROM book
                   LEFT JOIN author
@@ -20,13 +19,9 @@
                   WHERE book.title = '{$title}'
                   OR author.firstname = '{$title}'
                   OR publisher.pname ='{$title}'";
-                  // '{$module}'
-
-                   // "SELECT width FROM modules WHERE code = '".$module."'"
 
     $stmt = $conn->prepare($sql);
     $stmt->execute();
-    // ['title' => $title]
     $row = $stmt->fetch();
   } else {
     header('location: .');
@@ -38,15 +33,21 @@
 
         <div class="main-container">
           <h2>Result for your search ...</h2>
-          <div id = "book-details">
-            <p><b>Title</b>: <span><?php echo $row['title']; ?></span></p>
-            <p><b>Author</b>: <span><?php echo $row['firstname']; ?></span></p>
+          <div id = "book-searched">
+            <?php echo '<img src="data:image/jpeg;base64,'.base64_encode( $row['cover'] ).'"/>';?>
             <p><b>Publisher</b>: <span><?php echo $row['pname']; ?></span></p>
             <p><b>Year</b>: <span><?php echo $row['year']; ?></span></p>
             <p><b>Price</b>: <span><?php echo '$'.$row['price']; ?></span></p>
 
+
           </div>
-          <?php include '../templates/placeholder.html'; ?>
+
+
+        <?php include '../templates/placeholder.html'; ?>
       </div>
+
+      <script>
+
+      </script>
 
 <?php require '../app/footer.php'; ?>

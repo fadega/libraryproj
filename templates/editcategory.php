@@ -17,7 +17,7 @@
 <main>
   <?php
     //Check if user is authorized to access the page
-    if(isset($_SESSION['useremail'])||isset($_SESSION['emailId'])){?>
+    if(isset($_SESSION['userId'])||isset($_SESSION['useremail'])){?>
 
         <?php
           //check for error messages

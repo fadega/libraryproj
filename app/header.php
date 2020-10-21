@@ -1,6 +1,11 @@
 <?php
     session_start();
     $count=0;
+
+    /*
+this is the most used script along with footer script. This contains the menu,
+the styles, ajax library link
+    */
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -23,58 +28,60 @@
   </head>
   <body>
     <nav>
+      <!-- This is the navigation bar - menu bar -->
       <div class="content">
         <h1><a href="../templates/index.php"> BookStore</a></h1>
         <div class="links">
 
-          <!-- <input type="text" class="searchbox" id="search" placeholder="Search by Title, Author, or ISBN">
-          <a href="../app/search.php" class="btn-search">Search</a> -->
           <?php
+            // based on whether you're logged in or not, you will see different parts of the menu
+            //Here is you are signed you will see signout, dashbaord and your name
             if(isset($_SESSION['useremail'])||isset($_SESSION['firstname'])){
               echo ' <a href="../app/signout.inc.php">Signout</a>';
-              echo ' <a href="../templates/profile.php"><span> <img src="" alt=""></span>'.$_SESSION['firstname'].'</a>';
+              echo ' <a href="../templates/profile.php"><span> <img src="" alt=""></span> <b>'.$_SESSION['firstname'].'</b></a>';
+              echo '<a href="../templates/dashboard.php">Dashboard<span class="cart-notify cart" id="cart-quantity"></span> </a>';
             }else{
-              // echo '<a href="#" id="showmodal" name="button">Modal </a>';
+              // if not loggedin you will see signin and singup buttons
+
               echo '<a name="signin-submit" href="../templates/signin.php">Signin</a>';
               echo '<a name="log-submit" href="../templates/signup.php">Signup</a>';
             }
              ?>
 
-          <a href="#">Cart<span class="cart-notify">0</span> </a>
         </div>
+        <!-- This icon for closing and opening menu for small devices -->
         <i class="material-icons menu button" onclick="collapse()">menu</i>
       </div>
 
+      <!-- hamburger menu for small screens -->
       <div class="dropdown">
-        <input type="text" class="searchbox" placeholder="Search by Title, Author, or ISBN">
-        <a href="../app/search.php">Search</a>
+
         <?php
           if(isset($_SESSION['useremail'])||isset($_SESSION['firstname'])){
             echo ' <a href="../app/signout.inc.php">Signout</a>';
             echo ' <a href="../templates/profile.php"><span> <img src="" alt=""></span>'.$_SESSION['firstname'].'</a>';
+            echo '<a href="../templates/dashboard.php">Dashboard<span class="cart-notify cart"></span></a>';
           }else{
             echo '<a name="signin-submit" href="../templates/signin.php">Signin</a>';
             echo '<a name="log-submit" href="../templates/signup.php">Singup</a>';
           }
          ?>
-        <a href="#">Cart<span class="cart-notify">0</span></a>
+
       </div>
     </nav>
 
     <div class="secondary-menu" id="secondary-menu">
-
+      <!-- This is the secondary menu for users to access all features if authorized -->
       <div id="link-wrapper">
-
           <a href="../templates/author.php">Authors</a>
           <a href="../templates/book.php">Books</a>
           <a href="../templates/publisher.php">Publishers</a>
           <a href="../templates/category.php">Categories</a>
           <a href="../templates/genre.php">Genre</a>
-          <a href="../templates/comment.php">Comments</a>
-
+          
 
           <form class="search-from" action="../templates/searchResults.php" method="post">
-              <input type="text" name="search"  id="search" placeholder="Search ...">
+              <input type="text" name="search"  id="search" placeholder="Search by title...">
               <input type="submit" name="submit" value="Search">
               <!-- <a href="../app/search.php" name="sumbit" class="btn-search-top" style="margin:15px 0px 0px -50px;border:none;"> <img src="../templates/imgs/search.png" style="margin:top:20px;" alt=""> </a> -->
           </form>
@@ -83,10 +90,8 @@
 
        <div id="search-result">
          <div class=""></div>
-         <div class=""></div>
-         <div class=""></div>
          <div class="actual-result" id="show-list">
-           <!-- <li> Dynamic search list will show up here</li> -->
+           <!-- Dynamic search list will show up here -->
          </div>
 
        </div>
@@ -95,37 +100,4 @@
 
 <?php
 
-
-
   ?>
-  <script>
-    // AJAX call for autocomplete
-
-    $(document).ready(function () {
-      // Send Search Text to the server
-      $("#search").keyup(function () {
-        let searchText = $(this).val();
-        if (searchText != "") {
-          $.ajax({
-            url: "../app/search.php",
-            method: "post",
-            data: {
-              query: searchText,
-            },
-            success: function (response) {
-              $("#show-list").html(response);
-            },
-          });
-        } else {
-          $("#show-list").html("");
-        }
-      });
-      // Set searched text in input field on click of search button
-      $(document).on("click", "li", function () {
-        $("#search").val($(this).text());
-        $("#show-list").html("");
-      });
-    });
-
-
-    </script>

@@ -2,6 +2,11 @@
 <?php
  require '../app/header.php';
  require '../app/dbh.php';
+
+ /*
+    This script enables authorized users to pass data to category table to be inserted
+    This is the gateway script to the actual script that executes the insert command.
+ */
 ?>
 
 <main>
@@ -60,8 +65,7 @@
         // $res = $conn->prepare('SELECT * FROM book');
         $res->execute();
         $data = $res->fetchAll(PDO::FETCH_ASSOC);
-        // echo '<pre>';
-        // print_r($data);
+        
         foreach($data as $row):?>
           <tr>
 

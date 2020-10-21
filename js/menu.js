@@ -23,12 +23,12 @@
 
 
 //The below is for modal
-document.getElementById('showmodal').addEventListener('click',function(){
-  document.querySelector('#bg-modal').style.display="flex";
-});
-document.querySelector('.cross').addEventListener('click',function(){
-  document.querySelector('#bg-modal').style.display="none";
-});
+// document.getElementById('showmodal').addEventListener('click',function(){
+//   document.querySelector('#bg-modal').style.display="flex";
+// });
+// document.querySelector('.cross').addEventListener('click',function(){
+//   document.querySelector('#bg-modal').style.display="none";
+// });
 
 // /**** Autocomplet feature **/
 // $(document).ready(function () {

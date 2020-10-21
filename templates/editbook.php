@@ -31,7 +31,7 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
 $isbn = $result['ISBN'];
 $year = $result['year'];
 $year = $result['year'];
-$cover = $result['cover'];
+// $cover = $result['cover'];
 $price = $result['price'];
 $condition = $result['condition'];
 
@@ -40,9 +40,10 @@ $bid = $_GET['id'];
 ?>
 
 <main>
-<?php if(isset($_SESSION['useremail'])||isset($_SESSION['emailId'])){?>
+<?php if(isset($_SESSION['useremail'])||isset($_SESSION['useremail'])){?>
         <h1>Update book </h1>
           <?php
+
         //  check for error messages
           if(isset($_GET['error'])){
             if($_GET['error']=="emptyfields"){
@@ -124,9 +125,11 @@ $bid = $_GET['id'];
                 <input type="text" id="year_id" name="year" value="<?php echo (isset($year))?$year:'';?>" required>
             </div>
 
+            
             <div class="form-box">
-                <label for="cover">Cover</label>
-                <input type="text" id="cover" name="cover" value="<?php echo (isset($cover))?$cover:'';?>" >
+                <label for="cover">Cover Photo</label>
+                <!-- <input type="text" id="cover" name="cover" placeholder="Cover /upload" > -->
+                <input type="file" name="image">
             </div>
 
             <div class="form-box">

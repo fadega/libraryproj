@@ -1,5 +1,12 @@
 
-<?php  require '../app/header.php';?>
+<?php
+    /*
+      This script will receive user data for signup and perform basic forntend
+      validation before it passes the data to corresponding script(signup.inc.php)
+      which performs serverside validation and executes the insert command.
+
+    */
+    require '../app/header.php';?>
 
 <main>
         <h1>Sign up</h1>
@@ -8,6 +15,7 @@
         <?php
           //check for error messages
           if(isset($_GET['error'])){
+
               if($_GET['error']=="emptyfields"){
                 echo '<p style="color:red">Fill all required fields.</p>';
               }else if($_GET['error']=="invaliddata"){
@@ -31,6 +39,8 @@
 
 
          ?>
+
+         <!-- This contains the signup form -->
 
         <form name="my-form" action="../app/signup.inc.php" method="post">
             <div class="form-box">
@@ -59,9 +69,6 @@
                 <button type="submit" id="btnSend" name="submit">Singup</button>
                 <span class="span"> Already have an account? <a href="../templates/signin.php">Singin here</a> </span>
             </div>
-
-
-
 
         </form>
 

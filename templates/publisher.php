@@ -1,5 +1,10 @@
 
-<?php  require '../app/header.php';
+<?php
+    /*
+    This script enables authorized users to pass data to publisher.inc.php to insert details
+    to publisher table. It also display publisher details if any exist already.
+    */
+    require '../app/header.php';
     require '../app/dbh.php';
 
 ?>
@@ -67,8 +72,11 @@
 
         <?php
 
-        $sql ='SELECT *FROM publisher';
+        /*
+          code block below will display publisher details if database contains publishers yet
+        */
 
+        $sql ='SELECT *FROM publisher';
         $res = $conn->prepare($sql);
         // $res = $conn->prepare('SELECT * FROM book');
         $res->execute();

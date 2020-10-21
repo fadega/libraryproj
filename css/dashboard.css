@@ -26,6 +26,9 @@ body{
     padding: 0;
     margin: 0;
 }
+.active {
+  background:var(--greyapple);
+}
 a{
   text-decoration: none;
   color:var(--darkermatter);
@@ -44,20 +47,27 @@ a:hover{
   #dashside-left{
     display: grid;
     background-color:var(--darkermatter);
-    font-size:1.2em;
+    font-size:1.6em;
     font-weight: bold;
     padding:2rem 0;
     max-height: 100vh;
    }
       #dashside-left h2{
-        margin-left:-20px;
-      }
-      #dashside-left a,   #dashside-left h2{
-        padding:10px 0 5px 40px;
-        color:#e9ecef;
+        /* margin-left:-20px; */
+        text-align: center;
       }
 
-      #dashside-left a:hover{
+
+      #dashside-left .dash-btn{
+        background-color:var(--darkermatter);
+        color:#e9ecef;
+        border: none;
+        border-bottom:1px solid #f4f4f4;
+        cursor: pointer;
+        font-size: 0.8em;
+      }
+
+      #dashside-left .dash-btn:hover{
         background-color:var(--greyapple);
         color:var(--greenaple);
       }
@@ -92,9 +102,11 @@ a:hover{
           border-bottom:1px solid #ced4da;
           outline: none;
         }
+
         #dashside-right .right-middle{
+          display:none;
           background:#eee;
-          padding:2rem;
+          padding:1rem;
           border:1px solid #e5e5e5;
         }
 

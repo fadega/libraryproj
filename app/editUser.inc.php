@@ -1,5 +1,8 @@
 <?php
 
+/*
+    This script updates the user data in user table
+*/
 
 if(isset($_POST['firstname'])&& isset($_POST['lastname']) && isset($_POST['email'])){
         // require '../templates/libcommon.php';
