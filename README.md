@@ -82,7 +82,7 @@ The website site fully responsive except the search area (I am thinking of chang
   - This is the file that populated all the tables created by file mentioned in #2. This file should be executed before accessing index.php.
   - Run this file by typing: php install.php  from a CMD/terminal.
 
-## <span style="color:#f77f00">Update (for final submission)</span>
+## <span style="color:#f77f00">Update </span>
 
 •	A cover image for a book can be uploaded during insertion. If a cover isn’t added, an alternate text will be displayed along other details relevant of the book.
 •	Cart feature has been implemented. This feature allows users to add and remove books to cart and tells them the total amount due. Note – the feature isn’t integrated with payment method(for mock purposes) thus there is no checkout option.
