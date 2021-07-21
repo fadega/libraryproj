@@ -11,23 +11,23 @@ Author Details: Author ID, Title, First name, Last name
         - can add, update, and delete from all tables.
         - search for a book ...
   b. unregistered user
-        - for now they can only search for books
+        - view books, search books, [buy – add books to cart]. No checkout feature
 
 1.	Public(user) - can search for a book, and register to become a  registered user
 2.	Registered user – can search for a book, buy, comment on a book
 3.	Simple search: searching a book by title
-4.	Advanced Search: Searching a book, its author, publisher, and category. This search pulls data from multiple tables
+4.	Advanced Search: Searching a book title, its author, and ISBN. This search pulls data from multiple tables
 (search feature comes with autocomplete feature where suggestions are feed when a matching pattern is typed)
 
 1.DATABASE AND TABLES
-The bookstore application database has 8 tables up until now. The tables are
-author, publisher, user, book, category, genre, comment, and cart. Note that the table names are singular.
+The bookstore application database has 7 tables up until now. The tables are
+author, publisher, user, book, category, genr, and comment. Note that the table names are singular.
 
 a. Strong entities(tables)
-    - The author, user, publisher, and category tables are strong entities and they don't depend on other tables.
+    - The author, user, publisher, and category tables are strong entities, and they don't depend on other tables.
     - Therefore, they don't have foreign keys as their column names
 b. Weak entities (tables)
-    - The book, genre, comment, and cart tables depend on the strong entities to exist. Thus they have columns from the
+    - The book, genre, and comment tables depend on the strong entities to exist. Thus they have columns from the
     the strong entities as their foreign keys.
 
 2. DIRECTORY STRUCTURE AND FILE ORGANIZATION
@@ -56,12 +56,12 @@ with sample username and password. You have to signup and create your own email 
    *Example*
    - The file signin.php template in the 'templates' directory has a corresponding script in 'app' directory named 'signin.inc.php'.
 
-  3. FEATURES IMPLEMENTED SO FAR
-   - An authenticated user can insert, update, and delete records from all tables except the comments and carts table(yet to be built). Not all
-   registered will be able to do so at later stage. Only admins will be able to do so.
+  3. FEATURES IMPLEMENTED
+   - An authenticated user can insert, update, and delete records from tables except the comments table.
    - Search is implemented and data is pulled from multiple tables.
    - Autocomplete feature on the search field is implemented.
-   - The autocomplete suggestion area is not optimized for mobile yet, working on it.
+   - Advanced search implemented
+    - Cover image upload implemented
 
   ***SPECIAL FILES****
   1. dbh.php
@@ -75,5 +75,25 @@ with sample username and password. You have to signup and create your own email 
     - This is the file that populated all the tables created by file mentioned in #2. This file should be executed before accessing index.php.
     - Run this file by typing: php install.php  from a CMD/terminal.
 
-  ***NOTE**
-  My code is not heavely commented yet. This is because I keep changing certain functionalities several times. I will be adding more comments. 
+Update (for final submission):
+•	A cover image for a book can be uploaded during insertion. If a cover isn’t added, an alternate text will be displayed along other details relevant of the book.
+•	Cart feature has been implemented. This feature allows users to add and remove books to cart and tells them the total amount due. Note – the feature isn’t integrated with payment method(for mock purposes) thus there is no checkout option.
+•	Simple search: a simple search was implemented on the second submission. This feature only performed a simple search based on a book title. It also comes with an autocomplete feature. Dr. Matthew indicated that the autocomplete feature was not working in the feedback, I tested it and it still works.
+•	 Advanced Search:  I added a new feature for advanced search. This search is based on either one or all of the following fields – title, author name, and ISBN. Note that the fields aren’t from the same table – thus the search algorithm fetches data from multiple tables and displays the result in a separate page.
+•	Book display: for public users, books are displayed in a grid format with details including cover photo. However, for registered users, an option to delete/edit is available, and the books are displayed in a table format too.
+•	Delete and Edit buttons: The delete and edit buttons displayed in the frontend are not retrieved from the database. They are only included in a table display to correspond with each record so that when a user deletes or updates a record, then they know which records are being affected.
+•	AJAX: I used AJAX for the autocomplete feature of the simple search.  The AJAX code is in the main.js file.
+•	Dashboard: For loggedin users, a dashboard menu items is displayed on top. The dashboard features are not fully implemented. However, basic tasks of editing and deleting users, authors and books is integrated as part of it.
+•	Recommendation: sample data gets inserted once you run the install.php script. However, it’s better to insert your own data and work with.
+•	.htaccess: I have implemented a very basic configuration with htaccess. I used it to route everything through index.php and also throw a custom 404 page.
+•	Images : cover images uploaded are stored in table column as blob data type.
+•	Cover images: if install.php isn’t executed again, the images I have used for testing purposes all come from google.com. The images will be replaced with empty string once install.php is executed and you may want to update the cover photos or insert your own books with sample cover photo.
+•	404 file: A custom - file not found (404) is included and configuration in the .htaccess has been set.
+
+
+
+
+
+
+
+[Hero section image src ~ www.unsplash.com/]

@@ -7,7 +7,10 @@
  require '../app/dbh.php';
 
  try{
-   //get .sql file with the built in php function file_get_contents and execute it.
+   /* .sql(መኸዘኒ ሓበሬታ) ፋይል ብፋይላት ዝኸፍት ናይ PHP function(file_get_contents) ብምኽፋት ናብ ኮነክሽን(መተኣሳሰሪ/connection)
+      ብምሕላፍ 
+      get .sql file with the built in php function file_get_contents and execute it.
+   */
    $sql = file_get_contents("../app/dbsql.sql");
    $conn->exec($sql);
    //echo "2. Table(s) creation: Success, Eight tables created!\n";
@@ -15,18 +18,15 @@
    echo " Connection failed ". $e->getMessage();
  }
 
- /*
-   This following blocks of code will populate the tables with sample data.
-  Note: it is recommended that you enter your own data instead of working with the sample data
- */
 
  try{
-   //1/. Inserting sampple to user table
+   //1. Inserting  default library users to the "user" table
+   //   ኣብ ታሕቲ ዘሎ ትእዛዛት ናብ "user" ዝብሃል ሰንጠረጅ ሓበሬታ ክእቱ እዩ
 
    $conn->exec("INSERT INTO user(firstname, lastname,email,password,level,regDate)
-                         VALUES('Fadega','Afa','admin@gmail.com','admin','admin',DateTime('now'))");
+                         VALUES('እቡን','ኣዳግ','admin@gmail.com','admin','admin',DateTime('now'))");
    $conn->exec("INSERT INTO user(firstname, lastname,email,password,level,regDate)
-                         VALUES('David','James','davidj@gmail.com','paspas','standard',DateTime('now'))");
+                         VALUES('ሃይለ','ወርዕ','hailej@gmail.com','paspas','standard',DateTime('now'))");
    $conn->exec("INSERT INTO user(firstname, lastname,email,password,level,regDate)
                          VALUES('Helen','Berhe','helenb@gmail.com','secrete','standard',DateTime('now'))");
 
